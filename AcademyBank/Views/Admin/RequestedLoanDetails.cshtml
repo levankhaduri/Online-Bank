@@ -1,0 +1,93 @@
+﻿@model AcademyBank.Models.AccountLoan
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_LayoutAdminCp.cshtml";
+}
+
+    <div class="profile-body" style="width: 450px;">
+        <table class="ui celled table">
+
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th></th>
+                    <th>Loan</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <th scope="row">Phone number</th>
+                    <td>@Model.Account.User.PhoneNumber</td>
+
+                    <th>Balance</th>
+                    <td>@Model.Account.Balance</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Email</th>
+                    <td>@Model.Account.User.Email</td>
+
+
+                    <th>Purpose</th>
+                    <td>@Model.Loan.Purpose</td>
+                </tr>
+                <tr>
+                    <th scope="row">Firstname</th>
+                    <td>@Model.Account.User.UserInfo.FirstName</td>
+
+                    <th>Currency</th>
+                    <td>@Model.Loan.Currency</td>
+                </tr>
+                <tr>
+                    <th scope="row">Lastname</th>
+                    <td>@Model.Account.User.UserInfo.LastName</td>
+
+                    <th>Term</th>
+                    <td>@Model.Term</td>
+                </tr>
+                <tr>
+                    <th scope="row">Sex</th>
+                    <td>@Model.Account.User.UserInfo.Sex</td>
+
+
+
+                    <th>Sum</th>
+                    <td>@Model.Sum</td>
+                </tr>
+                <tr>
+                    <th scope="row">Passport ID</th>
+                    <td>@Model.Account.User.UserInfo.PassportId</td>
+
+                    <th>AdvancedPayment </th>
+                    <td>@Model.Loan.AdvancedPayment</td>
+                </tr>
+                <tr>
+                    <th scope="row">City</th>
+                    <td>@Model.Account.User.UserInfo.City</td>
+
+
+                    <th>Employment</th>
+                    <td>@Model.Employment</td>
+                </tr>
+                <tr>
+                    <th scope="row">Address</th>
+                    <td>@Model.Account.User.UserInfo.Address</td>
+
+
+                    <th>Status</th>
+                    <td style="color: orange;">Pending...</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <a class="ui inverted primary button" asp-controller="Admin" asp-action="LoanRequests">Back</a>
+        <a class="ui inverted green button" asp-controller="Admin" asp-action="ApproveLoan" asp-route-id="@Model.Id">Approve</a>
+        <a data-id="@Model.Id" class="ui inverted red button myBtn">Reject</a>
+        
+    </div>
+
+    <partial name="_PopUpWindowForRejectButtons" model='new PopUpWindowViewModel() {ControllerName="Admin",ActionName="RejectLoan",MainAction="RequestedLoanDetails",Id=Model.Id }' />

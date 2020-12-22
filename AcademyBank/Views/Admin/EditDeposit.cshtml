@@ -1,0 +1,72 @@
+﻿@model AcademyBank.Models.Deposit
+@{
+    ViewData["Title"] = "AddDeposit";
+    Layout = "~/Views/Shared/_LayoutAdminCp.cshtml";
+}
+
+<div class="addloan-form" style="width: 400px; margin-left: 10px">
+    <form class="ui form" asp-action="EditDeposit" asp-controller="Admin" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="field">
+            <label>Name</label>
+            <input type="text" asp-for="Name" placeholder="Name">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="field">
+            <label>Description</label>
+            <input type="text" asp-for="Description" placeholder="Description">
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="field">
+            <label>Benefits</label>
+            <input type="text" asp-for="Benefits" placeholder="Benefits">
+            <span asp-validation-for="Benefits" class="text-danger"></span>
+        </div>
+        <div class="field">
+            <label>Annual</label>
+            <input type="text" asp-for="Annual" placeholder="Annual">
+            <span asp-validation-for="Annual" class="text-danger"></span>
+        </div>
+        <div class="field">
+            <label>Bonus</label>
+            <input type="text" asp-for="Bonus" placeholder="Bonus">
+            <span asp-validation-for="Bonus" class="text-danger"></span>
+        </div>
+
+        <div class="field">
+            <label>Interest Payment Date </label>
+            <input type="date" asp-for="InterestPaymentDate" placeholder="Interest Payment Date ">
+            <span asp-validation-for="InterestPaymentDate" class="text-danger"></span>
+        </div>
+
+        <div class="field">
+            <label>Min Amount</label>
+            <input type="text" asp-for="MinAmount" placeholder="Min Amount">
+            <span asp-validation-for="MinAmount" class="text-danger"></span>
+        </div>
+
+        <div class="field">
+            <label>Max AMount</label>
+            <input type="text" asp-for="MaxAMount" placeholder="Max AMount">
+            <span asp-validation-for="MaxAMount" class="text-danger"></span>
+        </div>
+
+
+        <div class="field">
+            <label>Replanishment</label>
+            <input type="text" asp-for="Replenishment" placeholder="Replanishment">
+            <span asp-validation-for="Replenishment" class="text-danger"></span>
+        </div>
+
+
+        <button class="ui inverted green button" type="submit">Save</button>
+        <a class="ui inverted red button" asp-controller="Admin" asp-action="DepositManagment">Cancel</a>
+    </form>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="@Url.Content("~/js/global.js")"></script>

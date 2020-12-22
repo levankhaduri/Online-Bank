@@ -1,0 +1,130 @@
+﻿    <!DOCTYPE html>
+
+@model  AcademyBank.Models.User
+
+@{
+    Layout = "";
+ }
+
+<html lang="en">
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+    <!-- Title Page-->
+    <title>@ViewData["Title"] TBC Academy Bank</title>
+    <link rel='icon' href='~/images/abico.ico' type='image/x-icon' />
+    <!-- Icons font CSS-->
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- Main CSS-->
+    <link href="@Url.Content("~/css/signup.css")" rel="stylesheet" media="all">
+</head>
+<body>
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title">Registration Form</h2>
+                    <form method="POST" asp-action="RegisterContinue">
+                        <div class="text-danger"></div>
+                        <div class="row row-space form-group">
+                            <div class="col-2">
+                                <div class="form-group field">
+                                    <label asp-for="UserInfo.FirstName" class="control-label">First name</label>
+                                    <input class="form-control input--style-4" type="text" asp-for="UserInfo.FirstName" name="firstName">
+                                    <span asp-validation-for="UserInfo.FirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label asp-for="UserInfo.LastName" class="control-label">last name</label>
+                                    <input class="form-control input--style-4" type="text" asp-for="UserInfo.LastName" name="lastName">
+                                    <span asp-validation-for="UserInfo.LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label asp-for="UserInfo.PassportId" class="control-label">Passport ID</label>
+                                    <input class="input--style-4" type="text" asp-for="UserInfo.PassportId" name="passportId">
+                                    <span asp-validation-for="UserInfo.PassportId" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <label asp-for="UserInfo.Sex" class="label">Gender</label>
+                            <select asp-for="UserInfo.Sex" name="gender">
+                                <option disabled="disabled" selected="selected">Choose Gender</option>
+                                @foreach(var el in ViewBag.Gender as List<string>)
+                                {
+                                    <option>@el</option>
+                                }
+                            </select>
+                            <div class="select-dropdown"></div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="box">
+                            <label asp-for="UserInfo.City" class="label">City</label>
+                            <select asp-for="UserInfo.City" name="city">
+                                <option disabled="disabled" selected="selected">Choose City</option>
+                                @foreach (var el in ViewBag.Cities as List<string>)
+                                {
+                                    <option>@el</option>
+                                }
+                            </select>
+                            <div class="select-dropdown"></div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label asp-for="UserInfo.Address" class="control-label">Address</label>
+                                <input class="form-control input--style-4 resize" type="text" asp-for="UserInfo.Address" name="address">
+                                <span asp-validation-for="UserInfo.Address" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <label class="label">Security Question</label>
+                            <select name="subject">
+                                <option disabled="disabled" selected="selected">Choose Question</option>
+                                @foreach(var el in ViewBag.Questions as List<string>)
+                                {
+                                    <option>@el</option>
+                                }
+                            </select>
+                            <div class="select-dropdown"></div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">Answer</label>
+                                <input class="input--style-4 resize" type="text" name="Answer">
+                            </div>
+                        </div>
+                        <div class="p-t-15">
+                            @Html.ValidationSummary(false, "", new { @style = "color: red" })
+                            <button class="btn btn--radius-2 btn--blue" type="submit">Sign Up</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main JS-->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="@Url.Content("~/js/global.js")"></script>
+</body>
+</html>

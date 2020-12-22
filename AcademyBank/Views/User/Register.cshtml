@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+
+@model ValidationUser
+
+@{
+    Layout = "";
+}
+
+
+@functions{
+    public string CheckForErrors(string error, string seconError = null)
+    {
+        if (error != null || seconError != null)
+        {
+            <div class="alert alert-danger">
+                <img src="https://img.icons8.com/office/25/000000/high-risk.png/" style="position:absolute; display:inline-flex;" />
+                <p style="margin-inline-start: 34px;">
+                    @if (error != null) @Html.Raw(error)
+                    else @Html.Raw(seconError)
+                </p>
+            </div>
+        }
+        return string.Empty;
+    }
+}
+
+
+<html lang="en">
+<head>
+    <title>@ViewData["Title"] TBC Academy Bank</title>
+    <link rel='icon' href='~/images/abico.ico' type='image/x-icon' />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/fonts/font-awesome-4.7.0/css/font-awesome.min.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/fonts/Linearicons-Free-v1.0.0/icon-font.min.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/util.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/main.css")">
+</head>
+
+<body style="background-color: #666666;">
+    <div class="row" asp-validation-summary="All">
+        <div class="limiter">
+            <div class="container-login100">
+                <div class="wrap-login100">
+                    <form method="post" action="@Url.Action("Register", "User")" class="login100-form validate-form login100-padding">
+                        <span class="login100-form-title p-b-43">
+                            Sign up
+                        </span>
+
+                        <div class="wrap-input100 validate-input" data-validate="Valid email is required: email@email.com">
+                            <input class="input100" type="email" asp-for="Email" name="email">
+                            <span class="focus-input100" asp-validation-for="Email"></span>
+                            <span class="label-input100" asp-validation-for="Email">Email</span>
+                        </div>
+                        @CheckForErrors(ViewBag.EmailExistError)
+                        <div class="wrap-input100 validate-input">
+                            <input class="input100" type="tel" asp-for="PhoneNumber" name="phoneNumber">
+                            <span class="focus-input100" asp-validation-for="PhoneNumber"></span>
+                            <span class="label-input100" asp-validation-for="PhoneNumber">Phone Number</span>
+                        </div>
+                        @CheckForErrors(ViewBag.PhoneExistError, ViewBag.PhoneNumberError)
+                        <div class="wrap-input100 validate-input" data-validate="Password is required: at least 8 characters, one number, upper case and unique character">
+                            <input class="input100" id="password-field" type="password" asp-for="Password" name="password">
+                            <span class="focus-input100" asp-validation-for="Password"></span>
+                            <span class="label-input100" asp-validation-for="Password">Password</span>
+                            <span toggle="#password-field" style="color:#00AFEE;" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                        </div>
+                        @CheckForErrors(ViewBag.PasswordError)
+                        <div class="container-login100-form-btn">
+                            <button asp-action="Register" type="submit" class="login100-form-btn">
+                                Continue
+                            </button>                           
+                        </div>
+                        <br />
+                        <div class="container-login100-form-btn-1">
+                            <a asp-action="Login" style="color: #00AFEE;
+                                                         font-family: Montserrat-Bold;
+                                                         text-decoration: none">
+                                Login
+                            </a>
+                        </div>
+
+                        <div id="map" style="height: 350px;
+                                             margin-top:50px;
+                                             width: 100%"></div>
+                        <script>
+                            function initMap() {
+                                var uluru = { lat: 41.719756, lng: 44.711812 };
+                                var map = new google.maps.Map(
+                                    document.getElementById('map'), { zoom: 18, center: uluru });
+                                var marker = new google.maps.Marker({ position: uluru, map: map });
+                            }
+                        </script>
+                        <script async defer
+                                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGUXy3ZnRRYT99_oIrwVbzteo3N4frq-A&callback=initMap">
+                        </script>
+                    </form>
+
+                    <div class="login100-more" style="text-align:center">
+                        <img src="~/images/LOGOACADEMY.png" style="height:40%;
+                                                                margin-top:22%">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="@Url.Content("~/js/jquery-3.2.1.min.js")"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="@Url.Content("~/js/main.js")"></script>
+</body>
+</html>
+

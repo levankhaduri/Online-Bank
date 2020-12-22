@@ -1,0 +1,88 @@
+﻿@model IEnumerable<AcademyBank.Models.AccountDeposit>
+
+@{
+    ViewData["Title"] = "AllDeposits";
+    Layout = "_LayoutAuthenticated";
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous" />
+    <link rel="stylesheet" href="~/css/Accounts/accounts.css" />
+</head>
+
+<body>
+
+
+    <div class="container">
+
+
+        <div class="col-md module">
+            <h4>Deposits</h4>
+
+            @foreach (var item in Model)
+            {
+                <div class="row-md">
+                        <div class="account-container">
+                            <div class="account-header">
+                                @{
+                                    List<Deposit> deposits = ViewBag.deposits;
+                                    var depositType = deposits.SingleOrDefault(x => x.Id == item.DepositId);
+                                    @depositType.Name
+                                }
+                            </div>
+
+                            <div class="account-content">
+                                <div class="account-label">@Html.LabelFor(modelItem => item.DepositAmount):</div>
+                                <div class="account-value">@Html.DisplayFor(modelItem => item.DepositAmount)</div>
+
+                                <div class="account-label">@Html.LabelFor(modelItem => item.Status):</div>
+                                <div class="account-value">@Html.DisplayFor(modelItem => item.Status)</div>
+
+                                <div class="account-label">@Html.LabelFor(modelItem => item.Account.AccountName):</div>
+                                <div class="account-value">@Html.DisplayFor(modelItem => item.Account.AccountName)</div>
+
+                                <div class="account-label">@Html.LabelFor(modelItem => item.Account.AccountNumber):</div>
+                                <div class="account-value">@Html.DisplayFor(modelItem => item.Account.AccountNumber)</div>
+
+                                <div class="account-label">Currency</div>
+                                <div class="account-value">@depositType.Currency</div>
+
+                                <div class="account-label">Benefits</div>
+                                <div class="account-value">@depositType.Benefits</div>
+
+                                <div class="account-label">Annual</div>
+                                <div class="account-value">@depositType.Annual</div>
+
+                                <div class="account-label">About</div>
+                                <div class="account-value">@depositType.Description</div>
+
+                                <div class="account-label">Interest Rate</div>
+                                <div class="account-value">@depositType.InterestRate</div>
+
+                                <div class="account-label">Interest payment date</div>
+                                <div class="account-value">@depositType.InterestPaymentDate</div>
+
+                                <div class="account-label">Replenishment</div>
+                                <div class="account-value">@depositType.Replenishment</div>
+
+                            </div>
+                        </div>
+                </div>
+                <br />
+            }
+            <a class="btn btn-dark col-md" asp-controller="Deposits" asp-action="Index">Request a new deposit</a>
+            <hr />
+        </div>
+    </div>
+
+
+</body>
+</html>
+

@@ -1,0 +1,9 @@
+﻿@{
+    ViewData["Title"] = "Error Page";
+}
+<link rel="stylesheet" href="~/css/Error.css" />
+<div class="ErrorMessage">
+    <img src="~/images/ErrorImage3.png" style="display: block; margin-left: auto;margin-right: auto;" alt="" />
+    <p class="Error-Message">Oops, Unexpected Error Occurred on our Website</p>
+    <button class="btn btn-success" onclick="location.href='@Url.Action("Index", "Accounts")'" style="margin-left:45%">Account Page</button>
+</div>

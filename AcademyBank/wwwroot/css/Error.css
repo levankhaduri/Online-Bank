@@ -1,0 +1,22 @@
+﻿body {
+}
+
+.error {
+    color: #822814;
+    font-weight: bold;
+    font-family: "Courier New", Courier, monospace;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    padding-top: 15%;
+}
+
+.Error-Message {
+    font-weight: bold;
+    font-family: "Courier New", Courier, monospace;
+    text-align: center;
+    font-size:50pt;
+}
+.error-code{
+    font-size: 45pt;
+}

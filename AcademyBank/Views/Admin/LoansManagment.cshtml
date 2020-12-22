@@ -1,0 +1,93 @@
+﻿@model IEnumerable<AcademyBank.Models.Loan>
+@using PagedList;
+@using PagedList.Mvc;
+@using AcademyBank.Web.Models;
+@{
+    Layout = "_LayoutAdminCp";
+
+    int id = 0;
+    var currentPage = (ViewContext.HttpContext.Request.Query["page"].Count == 0)
+        ? 1
+        : int.Parse(ViewContext.HttpContext.Request.Query["page"]);
+
+    int counter = ((ViewData["loans"] as PagedList.IPagedList<Loan>).PageSize * (currentPage - 1)) + 1;
+
+    var urlParamOrdervalue = ViewContext.HttpContext.Request.Query["orderBy"];
+}
+
+<a style="margin-left:10px; margin-top: 10px;" class="ui inverted green button" asp-action="AddLoan">+Add new loan</a>
+
+		<h4 class="ui horizontal divider header">
+			Loans
+		</h4>
+
+		<table class="ui celled table">
+			<thead>
+				<tr>
+
+					<th scope="col">
+						№
+					</th>
+
+					@{
+						Html.RenderPartial("~/Views/Partials/_AdminTableSortablePartial.cshtml", new List<TablePartialModel> {
+					new TablePartialModel { UrlParamOrdervalue = urlParamOrdervalue, Order = "Name", OrderDesc="NameDesc", DisplayName = "Name",Action = "LoansManagment", Controller = "Admin", CurrentPage =currentPage },
+					new TablePartialModel { UrlParamOrdervalue = urlParamOrdervalue, Order = "Percentage", OrderDesc="PercentageDesc", DisplayName = "Percentage",Action = "LoansManagment", Controller = "Admin", CurrentPage =currentPage },
+					new TablePartialModel { UrlParamOrdervalue = urlParamOrdervalue, Order = "AccidantInsurance", OrderDesc="AccidantInsuranceDesc", DisplayName = "Accidant insurance",Action = "LoansManagment", Controller = "Admin", CurrentPage =currentPage },
+					new TablePartialModel { UrlParamOrdervalue = urlParamOrdervalue, Order = "InsuranceLoan", OrderDesc="InsuranceLoanDesc", DisplayName = "Insurance loan",Action = "LoansManagment", Controller = "Admin", CurrentPage =currentPage },
+					new TablePartialModel { UrlParamOrdervalue = urlParamOrdervalue, Order = "ServiceFee", OrderDesc="ServiceFeeDesc", DisplayName = "Service fee",Action = "LoansManagment", Controller = "Admin", CurrentPage =currentPage },
+					});
+					}
+
+					<th scope="col">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				@foreach (var loan in ViewData["loans"] as PagedList.IPagedList<Loan>)
+				{
+					id = loan.Id;
+					<tr>
+
+
+						<th scope="row">@(counter++)</th>
+						<td>
+							@Html.DisplayFor(modelItem => loan.Name)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => loan.Percentage)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => loan.AccidentInsurance)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => loan.InsuranceLoan)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => loan.ServiceFee)
+						</td>
+
+						<td>
+							<a asp-controller="Admin" asp-action="EditLoan" asp-route-id="@loan.Id" data-tooltip="Edit" data-position="bottom center" class="edit-icon"><i class="edit icon"></i></a>
+							<a data-id="@id" data-tooltip="Delete" data-position="bottom center" class="myBtn delete-icon"><i class="trash icon"></i></a>
+
+						</td>
+					</tr>
+				}
+
+			</tbody>
+		</table>
+
+		<hr />
+
+
+
+		@Html.Partial("~/Views/Partials/_TablePagingFooterPartial.cshtml", new TablePagingModel { Action = "LoansManagment", Controller = "Admin", UrlParamOrdervalue = urlParamOrdervalue, CurrentPage = currentPage, PageCount = (ViewData["loans"] as PagedList.IPagedList<Loan>).PageCount })
+
+
+
+		<partial name="_PopUpWindowForDeleteButtons" model='new PopUpWindowViewModel() {ControllerName="Admin",ActionName="DeleteLoan",MainAction="LoansManagment",Id=id }' />
+
+
+
+

@@ -1,0 +1,94 @@
+﻿@model AcademyBank.Models.AccountLoanViewModel
+
+@{
+    ViewData["Title"] = "Order Loan";
+    Layout = "_LayoutAuthenticated";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/Loans/OrderLoan.css" />
+</head>
+<body>
+    <h1 style="text-align: center;">Order loan</h1>
+    <form style="height: 890px;  margin-bottom: 10%;" asp-action="Create" asp-controller="AccountLoans">
+        <div class="form-group">
+            <label>Loan name</label>
+            <br />
+            <label style="font-weight: normal; font-size: 1.5rem;">@Model.Loan.Name</label>
+            <input asp-for="Status" value="@ViewBag.Status" hidden />
+        </div>
+        <div class="form-group">
+            <label>Employment</label>
+            <select class="form-control" required asp-for="Employment">
+                <option disabled="disabled" selected="selected">Select</option>
+                <option value="Officially">Officially</option>
+                <option value="Not Officially">Not Officially</option>
+                <option value="Maternity leave">Maternity leave</option>
+                <option value="Pensioner">Pensioner</option>
+                <option value="Individual entrepreneur">Individual entrepreneur</option>
+            </select>
+            <span asp-validation-for="Employment" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Date of employment</label>
+            <input class="form-control" type="date" />
+        </div>
+        <div class="form-group">
+            <label>Phone number in office</label>
+            <input class="form-control" asp-for="OfficePhoneNumber" type="text" placeholder="+995______" />
+            <span asp-validation-for="OfficePhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Loan sum</label>
+            <input class="form-control" asp-for="Sum" min="@Model.Loan.MinAmount" max="@Model.Loan.MaxAmount" />
+            <span asp-validation-for="Sum" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Currency</label>
+            <select class="form-control" asp-for="Currency">
+                <option disabled="disabled" selected="selected">Select</option>
+                @foreach (var el in ViewBag.Currencies as List<string>)
+                {
+                    <option>@el</option>
+                }
+            </select>
+            <span asp-validation-for="Currency" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Term (in month)</label>
+            <select class="form-control" asp-for="Term">
+                <option disabled="disabled" selected="selected">Select</option>
+                @foreach (var el in ViewBag.Term as List<string>)
+                {
+                    <option>@el</option>
+                }
+            </select>
+            <span asp-validation-for="Term" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Account for accure loan</label>
+            <select class="form-control" asp-for="AccrueAccountId" asp-items="ViewBag.AccrueAccountId"></select>
+            <span asp-validation-for="AccrueAccountId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Account to transfer from</label>
+            <select class="form-control" asp-for="AccountId" asp-items="ViewBag.AccountId"></select>
+            <span asp-validation-for="AccountId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Interest rate</label>
+            <label>@Model.Loan.InterestRate %</label>
+        </div>
+        <div class="form-group" style="display: flex;">
+            <a class="btn btn-primary" asp-action="Index" asp-controller="AccountLoans">Cancel</a>
+            <input class="btn btn-primary" style="margin-left:3%;" type="submit" value="ORDER LOAN" />
+        </div>
+    </form>
+</body>
+</html>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

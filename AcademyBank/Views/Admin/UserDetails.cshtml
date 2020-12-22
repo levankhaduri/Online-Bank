@@ -1,0 +1,57 @@
+﻿@model AcademyBank.Models.User
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_LayoutAdminCp.cshtml";
+}
+
+<div class="profile-body" style="width: 450px;">
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserInfo.FirstName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserInfo.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserInfo.LastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserInfo.LastName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserInfo.PassportId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserInfo.PassportId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserInfo.City)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserInfo.City)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserInfo.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserInfo.Address)
+        </dd>
+    </dl>
+
+</div>
+
+
+<div>
+    <a class="ui inverted primary button" asp-controller="Admin" asp-action="ActiveUsers" >Back</a>
+    <a class="ui inverted red button" asp-controller="Admin" asp-action="BlockUser" asp-route-id= "@Model.Id">Block user</a>
+</div>
+
+
+

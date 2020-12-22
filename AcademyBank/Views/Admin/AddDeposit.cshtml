@@ -1,0 +1,68 @@
+﻿@model AcademyBank.Models.Deposit
+@{
+    ViewData["Title"] = "AddDeposit";
+    Layout = "~/Views/Shared/_LayoutAdminCp.cshtml";
+}
+
+<div class="addloan-form" style="width: 400px; margin-left: 10px">
+    <form class="ui form" asp-action="AddDeposit" asp-controller="Admin">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="field">
+            <label>Name</label>
+            <input type="text" name="name" placeholder="Name">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="field">
+            <label>Description</label>
+            <input type="text" name="description" placeholder="Description">
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="field">
+            <label>Benefits</label>
+            <input type="text" name="benefits" placeholder="Benefits">
+             <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="field">
+            <label>Annual</label>
+            <input type="text" name="annual " placeholder="Annual">
+            <span asp-validation-for="Annual" class="text-danger"></span>
+        </div>
+        <div class="field">
+            <label>Bonus</label>
+            <input type="text" name="bonus" placeholder="Bonus">
+            <span asp-validation-for="Bonus" class="text-danger"></span>
+        </div>
+
+        <div class="field">
+            <label>Interest Payment Date </label>
+            <input type="date" name="interestPaymentDate " placeholder="Interest Payment Date ">
+            <span asp-validation-for="InterestPaymentDate" class="text-danger"></span>
+        </div>
+
+        <div class="field">
+            <label>Min Amount</label>
+            <input type="text" name="minAmount" placeholder="Min Amount">
+            <span asp-validation-for="MinAmount" class="text-danger"></span>
+        </div>
+
+
+        <div class="field">
+            <label>Max Amount</label>
+            <input type="text" name="maxAmount" placeholder="Max AMount">
+            <span asp-validation-for="MaxAMount" class="text-danger"></span>
+        </div>
+
+
+        <div class="field">
+            <label>Replenishment</label>
+            <input type="text" name="replanishment " placeholder="Replanishment">
+            <span asp-validation-for="Replenishment" class="text-danger"></span>
+        </div>
+
+
+
+        <button class="ui inverted green button" type="submit" value="AddDeposit" asp-controller="Admin" asp-action="AddDeposit">
+        Submit</button>
+        <a class="ui inverted red button" asp-controller="Admin" asp-action="DepositManagment">Cancel</a>
+    </form>
+</div>

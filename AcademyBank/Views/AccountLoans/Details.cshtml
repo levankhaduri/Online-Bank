@@ -1,0 +1,110 @@
+﻿@model AcademyBank.Models.AccountLoan
+
+@{
+    ViewData["Title"] = "Loan Details";
+    Layout = "_LayoutAuthenticated";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body style="background-color:#f1f1f1;">
+    <h1 style="text-align: center;">Loan details</h1>
+    <div style="border: 2px #007bff59 solid; margin: 0 2%; margin-bottom: 10%;">
+        <div>
+            <div style="display: flex;">
+                <div style="background-color: #ffffff; border: 3px #4e7bfe solid; border-radius: 50%; height: 200px; width: 200px; margin: 1%; margin-right: 5%;">
+                    <label style="font-size: 30px; font-weight: bold; padding: 35%;">@((int)Model.Loan.InterestRate)%</label>
+                </div>
+                <div style="width: 45%; margin-top: 2%;">
+                    <h4>@Model.Loan.Name</h4>
+                    <p style="font-size: 20px;">
+                        Found goods for beneficial price? Price of renovation exceeded planned budget? Your dream holiday is more expensive than you have expected?
+                    </p>
+                    <p style="font-size: 20px;">
+                        Try the green loan from ACADEMYBANK and enjoy a new quality of life.
+                    </p>
+                </div>
+            </div>
+            <div style="display: flex; border: 3px #007bff9e solid; border-style: double;">
+                <div style="width: 40%;">
+                    <ul style="font-size: 1rem; margin-left: 13%; margin-top: 3%;">
+                        <li>Fixed interest rate - unchanged for the entire loan period.</li>
+                        <li>Full information about all interest and commissions on the loan.</li>
+                        <li>14 days grace period - you can return the loan within the specified period.</li>
+                    </ul>
+                </div>
+                <div style="margin-left: 26%; margin-top: 6%;">
+                    <a class="btn btn-primary" asp-action="Create" asp-controller="AccountLoans" asp-route-Id="@Model.Id">MAKE A REQUEST</a>
+                </div>
+            </div>
+            <div style="display: flex;">
+                <div style="width: 50%; padding: 1%;">
+                    <h4>GENERAL INFORMATION</h4>
+                    <div style="border: 1px #5ca8fa solid; height: 335.22px;">
+                        <h5 style="padding: 3% 2%; padding-top: 2%;">Green cash loan at ACADEMYBANK</h5>
+                        <ul style="font-size: 1rem; margin-left: 7%">
+                            <li style="margin: 1% 0;">simple and transparent conditions and terms in the popular stable Bank</li>
+                            <li style="margin: 1% 0;">possibility to select optimal payment</li>
+                            <li style="margin: 1% 0;">fixed interest rate for the entire financing period</li>
+                            <li style="margin: 1% 0;">payment of interest and fee only for the loan utilization period</li>
+                            <li style="margin: 1% 0;">early repayment without penalties</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="width: 50%; padding: 1%;">
+                    <h4>GENERAL CONDITIONS</h4>
+                    <div style="display: flex; border: 1px #5ca8fa solid;">
+                        <div style="padding: 2%; width: 48%;">
+                            <label>Credit currenct</label>
+                            <br />
+                            <label>Loan sum</label>
+                            <br />
+                            <label>Interest rate</label>
+                            <br />
+                            <label>Term</label>
+                            <br />
+                            <label>Payment for accident insurance</label>
+                            <br />
+                            <label>Fee for issuance loan</label>
+                            <br />
+                            <label>Fee for services upon receipt cash</label>
+                            <br />
+                            <label>Debts repayment schedule</label>
+                            <br />
+                            <label>Advanced repayment</label>
+                        </div>
+                        <div style="padding: 2%; width: 52%;">
+                            <label>@Model.Loan.Currency</label>
+                            <br />
+                            <label>From @Model.Loan.MinAmount @Model.Loan.Currency to @Model.Loan.MaxAmount @Model.Loan.Currency</label>
+                            <br />
+                            <label>From @((int)Model.Loan.InterestRate)%</label>
+                            <br />
+                            <label>@Model.Loan.Term</label>
+                            <br />
+                            <label>@Model.Loan.AccidentInsurance @Model.Loan.Currency</label>
+                            <br />
+                            @if (Model.Loan.InsuranceLoan == 0)
+                            {
+                                <label>Absent</label>
+                            }
+                            else
+                            {
+                                <label>@Model.Loan.InsuranceLoan @Model.Loan.Currency</label>
+                            }
+                            <br />
+                            <label>@Model.Loan.ServiceFee @Model.Loan.Currency</label>
+                            <br />
+                            <label>@Model.Loan.RepaymentSchedule</label>
+                            <br />
+                            <label>@Model.Loan.AdvancedPayment</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

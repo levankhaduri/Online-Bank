@@ -1,0 +1,14 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+<link rel="stylesheet" href="~/css/Error.css" />
+<div class="error">
+    <p class="error-code">@Model.ErrorCode</p>
+    <hr />
+    <br />
+    <p class="error-code">@Model.Description</p>
+</div>
+<button class="btn btn-dark" onclick="location.href='@Url.Action("Index", "Accounts")'" style="margin-left:45%">Account Page</button>
+
+

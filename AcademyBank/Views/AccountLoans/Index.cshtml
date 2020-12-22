@@ -1,0 +1,97 @@
+﻿@model IEnumerable<AcademyBank.Models.Loan>
+
+@{
+    ViewData["Title"] = "Loans";
+    Layout = "_LayoutAuthenticated";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/Loans/LoanList.css" />
+</head>
+<body>
+    <h1 class="title">Choose loan</h1>
+    <div class="loan-filter">
+        <h1>Filter</h1>
+        <form>
+            <div class="form-group">
+                <label>Loan purpose</label>
+                @Html.DropDownList("searchPurpose",
+                    new SelectList(ViewBag.Purpose),
+                    "Select Purpose",
+                    new { @class = "form-control", @id = "resetselect" })
+            </div>
+            <div class="form-group">
+                <label>Amount</label>
+                @Html.TextBox("searchAmount", "", new { @class = "form-control", @id = "resetinput" })
+            </div>
+            <div class="form-group">
+                <label>Loan term (In Months)</label>
+                @Html.DropDownList("searchTerm",
+                    new SelectList(ViewBag.Term),
+                    "Select Term",
+                    new { @class = "form-control", @id = "resetselect2" })
+            </div>
+            <div style="display:flex">
+                <button type="submit" class="buttons MyButtons" id="find" style="margin-right:2%">FIND</button>
+                <a asp-action="Index" asp-controller="AccountLoans" type="button" class="buttons MyButtons" >RESET PARAMETERS</a>
+            </div>
+
+            <a class="buttons MyButtons MyLoansButton" asp-action="AllLoans" asp-controller="AccountLoans">MY LOANS</a>
+        </form>
+    </div>
+
+
+    <div class="loan-list-container">
+        @foreach (var el in Model)
+        {
+            <div class="row">
+                <div class="col">
+                    <div class="circle">
+                        <div class="circle inside-circle">@((int)el.InterestRate)%</div>
+                    </div>
+                    <p class="h12">@el.Name</p>
+                    <div style="display: flex; margin-bottom: 5%;">
+                        <div style="margin-right: 5%;">
+                            <label>Interest rate</label>
+                            <br />
+                            <label>Maximum amount</label>
+                            <br />
+                            <label>Monthly fee</label>
+                            <br />
+                            <label>Interest rate for the loan</label>
+                            <br />
+                            <label>Term</label>
+                            <br />
+                            <label>Purpose</label>
+                        </div>
+                        <div>
+                            <label style="font-weight:bold;">@((int)el.InterestRate)</label>
+                            <br />
+                            <label style="font-weight:bold;">@el.MaxAmount @el.Currency</label>
+                            <br />
+                            <label style="font-weight:bold;">@((int)el.ServiceFee)%</label>
+                            <br />
+                            <label style="font-weight:bold;">@((int)el.LoanInterestRate)%</label>
+                            <br />
+                            <label style="font-weight:bold;">@el.Term  Months</label>
+                            <br />
+                            <label style="font-weight:bold;">@el.Purpose</label>
+                        </div>
+                    </div>
+                    <div style="display:flex; margin-bottom: 5%; margin-left: 30%;">
+                        <a class="btn btn-outline-primary" asp-action="Create" asp-controller="AccountLoans" asp-route-Id="@el.Id">Make A Request</a>
+                        <a style="margin-left: 2%;" class="btn btn-outline-primary" asp-action="Details" asp-controller="AccountLoans" asp-route-Id="@el.Id">Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</body>
+</html>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

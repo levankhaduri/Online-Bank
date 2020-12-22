@@ -1,0 +1,105 @@
+﻿@model IEnumerable<AcademyBank.Models.Deposit>
+
+@{
+    Layout = "_LayoutAuthenticated";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/Deposits/deposit.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1 class="title">Choose deposit</h1>
+    <div class="deposit-filter">
+        <h1>Filter</h1>
+        <form>
+            <div class="form-group">
+                <label>Currency </label>
+                @Html.DropDownList("searchCurrency",
+                    new SelectList(Enum.GetValues(ViewBag.CurrencyEnums)),
+                    "Select Currency",
+                    new { @class = "form-control", @id = "resetselect" })
+            </div>
+            <div class="form-group">
+                <label>Amount</label>
+                @Html.TextBox("searchAmount", "", new { @class = "form-control", @id = "resetinput" })
+            </div>
+            <div style="display:flex">
+                <button type="submit" class="buttons MyButtons" id="find" style="margin-right:2%">FIND</button>
+                <button type="button" class="buttons MyButtons" id="resetparams">RESET PARAMETERS</button>
+            </div>
+
+            <a class="buttons MyButtons MyDepositsButton" asp-action="AllDeposits" asp-controller="Deposits">MY DEPOSITS</a>
+
+        </form>
+    </div>
+
+
+    <div class="deposit-list-container">
+        @if (Model.Count() == 0)
+        {
+            <h3 class="text-uppercase" style="margin:20%">no deposit has been found</h3>
+
+        }
+        else
+        {
+            <h5 style="color:#4285f4;float:right;margin-right:5px;">@Model.Count() deposit</h5>
+        }
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="col">
+                    <div class="circle">
+                        <div class="circle inside-circle">@((int)item.InterestRate)%</div>
+                    </div>
+                    <p class="h12">@item.Name</p>
+                    <div style="display: flex; margin-bottom: 5%;">
+                        <div style="margin-right: 5%;">
+                            <label>Currency</label>
+                            <br />
+                            <label>Annual rate</label>
+                            <br />
+                            <label>
+                                Max amount
+                            </label>
+                            <label>
+                                Bonus rate for opening the deposit in
+                                ACADEMYBANK online do first month
+                            </label>
+                        </div>
+                        <div>
+                            <label style="font-weight:bold;">@item.Currency</label>
+                            <br />
+                            <label style="font-weight:bold;">@((int)item.Annual)%</label>
+                            <br />
+                            <label style="font-weight:bold;">@item.MaxAMount @item.Currency</label>
+                            <br />
+                            <label style="font-weight:bold;">@((int)item.Bonus)%</label>
+                        </div>
+                    </div>
+                    <div style="display:flex; margin-bottom: 5%; margin-left: 30%;">
+                        <a class="buttons MyButtons" asp-action="Create" asp-controller="Deposits" asp-route-Id="@item.Id">Request a deposit</a>
+                        <a style="margin-left: 2%;" class="buttons MyButtons" asp-action="Details" asp-controller="Deposits" asp-route-Id="@item.Id">Details</a>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#resetparams').click(function () {
+                console.log('clic')
+                document.getElementById('resetselect').value = ""
+                document.getElementById('resetinput').value = 0
+            })
+        });
+
+    </script>
+</body>
+</html>

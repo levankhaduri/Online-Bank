@@ -1,0 +1,273 @@
+﻿@{
+    Layout = "_LayoutAuthenticated";
+}
+
+@model IEnumerable<Card>
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/css/Cards/Cards.css" />
+    <!------ Include the above in your HEAD tag ---------->
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+</head>
+
+<body>
+    @if (Model.Count() == 0 || Model == null)
+    {
+        <a asp-controller="Accounts" asp-action="Create" class="btn btn-outline-light"><b>Create Account</b></a>
+        <a asp-controller="Cards" asp-action="RequestCard" class="btn btn-outline-light"><b>Request Card</b></a>
+    }
+    else
+    {
+        <div>
+            <ul class="nav bg-light nav-pills rounded nav-fill mb-3" role="tablist">
+
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="pill" href="#nav-tab-card">
+                        <i class="fa fa-credit-card"></i> Transfer
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#nav-tab-paypal">
+                        <i class="fab fa-paypal"></i>  Replenish
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#nav-tab-utilities">
+                        <i class="fab fa-amazon-pay"></i>  Utilities
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="nav-tab-card">
+
+                <form method="post" asp-action="Transfer" class="form-inline minicontainer" style="padding-left: -35%; padding-top: -35%">
+                    <div class="form-group" style="display: flex; flex-direction: column; justify-content: space-around; width: 50%; height: 35%; padding-top: 10px;">
+                        <div style="display: flex; flex-direction: row;">
+                            <label for="cardNumber" style="justify-content: flex-start; padding-top: 10px; padding-right: 10px;"><b>From Card</b></label>
+                            <div class="input-group" style="padding-top: 15px;">
+                                <div class="box" style="flex-direction: row;">
+                                    <select name="cardNumberFrom">
+                                        <option disabled="disabled" selected="selected">Choose Card</option>
+                                        @foreach (var card in Model)
+                                        {
+                                            <option>@card.CardNumber</option>
+                                        }
+                                    </select>
+                                    <div class="select-dropdown"></div>
+                                </div>
+                                <div class="input-group-append">
+                                    <span class="input-group-text text-muted">
+                                        <i class="fab fa-cc-visa"></i>   <i class="fab fa-cc-amex"></i>
+                                        <i class="fab fa-cc-mastercard"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: row;">
+                            <label for="cardNumber" style="justify-content: flex-start; padding-top: 5px; padding-right: 10px;"><b>To Card</b></label>
+                            <div class="input-group" style="padding-bottom: 20px; padding-top: 20px;">
+                                <input type="text" class="col-xs-4" name="cardNumberTo" placeholder="Card number">
+                                <div class="input-group-append">
+                                    <span class="input-group-text text-muted">
+                                        <i class="fab fa-cc-visa"></i>   <i class="fab fa-cc-amex"></i>
+                                        <i class="fab fa-cc-mastercard"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <i class="fa fa-angle-double-right" style="font-size:25px; color: gray; position: absolute; display: flex; justify-content: center; align-content: center;left: 45%; width: 10%;"></i>
+
+                    <div class="form-group" style="display: flex; flex-direction: column; justify-content: space-around; padding-top: 10px; width: 50%;">
+                        <div class="col-xs-2" style="display: flex; flex-direction: row; padding-top: 10px; padding-right: 10px;">
+                            <label for="col-xs-2" style="padding-right: 10px;"><b>Amount</b></label>
+                            <input type="text" name="amount" class="form-control" id="inputPassword4" placeholder="Amount">
+                        </div>
+                        <div style="padding-bottom: 20px; padding-top: 15px; margin-left: 50px;">
+                            <button asp-controller="Cards" asp-action="Transfer" type="submit" class="btn btn-outline-info"><b>TRANSFER</b></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="nav-tab-paypal">
+                <form class="form-inline minicontainer" method="post" asp-action="Transfer" style="display: flex; flex-direction: row; justify-content: space-around; width: 100%; height: 35%;">
+                    <div class="form-group" style="display: flex; flex-direction: column; width: 50%; height: 35%;">
+                        <div style="display: flex; flex-direction: row;">
+                            <label for="cardNumber" style="justify-content: flex-start; padding-right: 10px;"><b>From Card</b></label>
+                            <div class="input-group">
+                                <div class="box" style="flex-direction: row;">
+                                    <select name="cardNumberFrom">
+                                        <option disabled="disabled" selected="selected">Choose Card</option>
+                                        @foreach (var card in Model)
+                                        {
+                                            <option>@card.CardNumber</option>
+                                        }
+                                    </select>
+                                    <div class="select-dropdown"></div>
+                                </div>
+                                <div class="input-group-append">
+                                    <span class="input-group-text text-muted">
+                                        <i class="fab fa-cc-visa"></i>   <i class="fab fa-cc-amex"></i>
+                                        <i class="fab fa-cc-mastercard"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: row;">
+                            <label for="cardNumber" style="justify-content: flex-start; padding-top: 10px; padding-right: 10px;"><b>To Card</b></label>
+                            <div class="input-group" style="padding-top: 10px;">
+                                <div class="box" style="flex-direction: row;">
+                                    <select name="cardNumberTo">
+                                        <option disabled selected>Choose Card</option>
+                                        @foreach (var card in Model)
+                                        {
+                                            <option>@card.CardNumber</option>
+                                        }
+                                    </select>
+                                    <div class="select-dropdown"></div>
+                                </div>
+                                <div class="input-group-append">
+                                    <span class="input-group-text text-muted">
+                                        <i class="fab fa-cc-visa"></i>   <i class="fab fa-cc-amex"></i>
+                                        <i class="fab fa-cc-mastercard"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <i class="fa fa-angle-double-right" style="font-size:25px; color: gray; position: absolute; display: flex; justify-content: center; align-content: center;left: 45%; width: 10%;"></i>
+
+                    <div class="form-group" style="display: flex; flex-direction: column; padding-top: 10px; width: 50%;">
+                        <div class="col-xs-2" style="display: flex; flex-direction: row; padding-top: 10px; padding-right: 10px;">
+                            <label for="col-xs-2" style="padding-right: 10px;"><b>Amount</b></label>
+                            <input type="text" name="amount" class="form-control" id="inputPassword4" placeholder="Amount">
+                        </div>
+                        <div style="padding-bottom: 20px; padding-top: 15px; margin-left: 50px;">
+                            <button asp-controller="Cards" asp-action="Transfer" type="submit" class="btn btn-outline-info"><b>REPLENISH</b></button>
+                            @ViewBag.Message
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="nav-tab-utilities">
+                <form asp-controller="Cards" asp-action="UtilityTransfer" method="post">
+                    <h4 style="font-size: 20px; color: #778899;"><b>REFILL CELLPHONE ACCOUNT</b></h4>
+                    <div class="form-row minicontainer">
+                        <div class="form-group col-md-6">
+                            <div class="dropdown">
+                                <label for="cardNumber" style="padding-left: 50px; margin-top: 45px; padding-right: 10px;"><b>From Card</b></label>
+                                <select class="mdb-select md-form colorful-select dropdown-primary" style="margin-top: 15px; margin-bottom: 30px;" name="cardNumberFrom">
+                                    <option value="" disabled selected>Choose Card</option>
+                                    @foreach (var card in Model)
+                                    {
+                                        <option>@card.CardNumber</option>
+                                    }
+                                </select>
+                                <label class="mdb-main-label">Card</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="col-xs-4" style="margin-top: 15px; margin-bottom: 10px;"><b>Phone number</b></label>
+                            <input type="number" min="0" class="form-control" placeholder="Phone number" style="margin-bottom: 30px;">
+                        </div>
+                        <div class="col-xs-2">
+                            <label for="col-xs-2" style="margin-top: 15px; margin-bottom: 10px;"><b>Amount</b></label>
+                            <input type="number" min="0" class="form-control" placeholder="Amount" name="amount" style="margin-bottom: 30px;">
+                        </div>
+                        <div>
+                            <button type="submit" asp-controller="Cards" asp-action="UtilityTransfer" class="btn btn-outline-info" style="align-items: center;align-content: center; margin-left: 20px; margin-top: 48px;"><b>SUBMIT</b></button>
+                        </div>
+                    </div>
+                </form>
+                <br />
+                <form asp-controller="Cards" asp-action="UtilityTransfer" method="post">
+                    <h4 style="font-size: 20px; color: #778899;"><b>REFILL UTILITY ACCOUNT</b></h4>
+                    <div class="form-row minicontainer">
+                        <div class="form-group col-md-6">
+                            <div class="dropdown">
+                                <label for="cardNumber" style="padding-left: 50px; margin-top: 45px; padding-right: 10px;"><b>From Card</b></label>
+                                <select class="mdb-select md-form colorful-select dropdown-primary" style="margin-top: 15px; margin-bottom: 30px;" name="cardNumberFrom">
+                                    <option value="" disabled selected>Choose Card</option>
+                                    @foreach (var card in Model)
+                                    {
+                                        <option>@card.CardNumber</option>
+                                    }
+                                </select>
+                                <label class="mdb-main-label">Card</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <label for="col-xs-2" style="margin-top: 15px; margin-bottom: 10px;"><b>Utility account number</b></label>
+                            <input type="number" min="0" class="form-control" placeholder="Utility account number" style="margin-bottom: 30px;">
+                        </div>
+                        <div class="col-xs-2">
+                            <label for="col-xs-2" style="margin-top: 15px; margin-bottom: 10px;"><b>Amount</b></label>
+                            <input type="number" min="0" class="form-control" placeholder="Amount" name="amount" style="margin-bottom: 30px;">
+                        </div>
+                        <div>
+                            <button type="submit" asp-controller="Cards" asp-action="UtilityTransfer" class="btn btn-outline-info" style="align-items: center;align-content: center; margin-left: 20px; margin-top: 48px;"><b>SUBMIT</b></button>
+                        </div>
+                    </div>
+                </form>
+                <br />
+                <form asp-controller="Cards" asp-action="UtilityTransfer" method="post">
+                    <h4 style="font-size: 20px; color: #778899;"><b>REFILL INTERNET BALANCE</b></h4>
+                    <div class="form-row minicontainer">
+                        <div class="form-group col-md-6">
+                            <div class="dropdown">
+                                <label for="cardNumber" style="padding-left: 50px; margin-top: 45px; padding-right: 10px;"><b>From Card</b></label>
+                                <select class="mdb-select md-form colorful-select dropdown-primary" style="margin-top: 15px; margin-bottom: 30px;" name="cardNumberFrom">
+                                    <option value="" disabled selected>Choose Card</option>
+                                    @foreach (var card in Model)
+                                    {
+                                        <option>@card.CardNumber</option>
+                                    }
+                                </select>
+                                <label class="mdb-main-label">Card</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <label for="col-xs-2" style="margin-top: 15px; margin-bottom: 10px;"><b>Provider's account number</b></label>
+                            <input type="number" min="0" class="form-control" placeholder="Internet account number" style="margin-bottom: 30px;">
+                        </div>
+                        <div class="col-xs-2">
+                            <label for="col-xs-2" style="margin-top: 15px; margin-bottom: 10px;"><b>Amount</b></label>
+                            <input type="number" min="0" class="form-control" placeholder="Amount" name="amount" style="margin-bottom: 30px;">
+                        </div>
+                        <div>
+                            <button type="submit" asp-controller="Cards" asp-action="UtilityTransfer" class="btn btn-outline-info" style="align-items: center;align-content: center; margin-left: 20px; margin-top: 48px;"><b>SUBMIT</b></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    }
+
+</body>
+
+
+
+<script>
+    $('select[name=cardNumberTo]').on('change', function () {
+        var self = this;
+        $('select[name=cardNumberFrom]').find('option').prop('disabled', function () {
+            return this.value == self.value
+        });
+    });
+
+    $('select[name=cardNumberFrom]').on('change', function () {
+        var self = this;
+        $('select[name=cardNumberTo]').find('option').prop('disabled', function () {
+            return this.value == self.value
+        });
+    });
+</script>

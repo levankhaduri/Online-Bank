@@ -1,0 +1,64 @@
+﻿@model IEnumerable<AcademyBank.Models.Card>
+
+@{
+    Layout = "_LayoutAdminCp";
+}
+
+
+<a asp-controller="Admin" asp-action="CardRequests" class="ui inverted primary button">Pending Cards</a>
+<a asp-controller="Admin" asp-action="ActiveCards" class="ui inverted green button">Active Cards</a>
+<a asp-controller="Admin" asp-action="RejectedCards" class="ui inverted red button">Rejected Cards</a>
+<a asp-controller="Admin" asp-action="BlockedCards" class="ui inverted red button">Blocked Cards</a>
+
+@{
+    if(Model.FirstOrDefault(x => x.Status == "Active") != null)
+    {
+<h3>Active Cards</h3>
+<table class="ui sortable celled table">
+    <thead>
+        <tr>
+            <th> @Html.DisplayNameFor(x => x.Account.User.UserInfo.FirstName)</th>
+            <th> @Html.DisplayNameFor(x => x.Account.User.UserInfo.LastName)</th>
+            <th> @Html.DisplayNameFor(x => x.Account.User.Email)</th>
+            <th> @Html.DisplayNameFor(x => x.Account.User.PhoneNumber)</th>
+            <th> @Html.DisplayNameFor(x => x.CardType)</th>
+            <th> @Html.DisplayNameFor(x => x.Status)</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.User.UserInfo.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.User.UserInfo.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.User.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.User.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CardType)
+            </td>
+            <td style="color: green;">
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                <a class="ui inverted red button" asp-controller="Admin" asp-action="RejectCard" asp-route-id="@item.Id">Reject</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<script src="~/js/AdminPanel/TableSorter.js"></script>
+<script>$('table').tablesort()</script>
+    }
+    else
+    {
+        <h3><b>List of active cards is empty</b></h3>
+    }
+ }

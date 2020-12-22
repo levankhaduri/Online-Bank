@@ -1,0 +1,112 @@
+﻿@model AcademyBank.Models.User
+@{
+    ViewData["Title"] = "EditProfile";
+    Layout = "~/Views/Shared/_LayoutAdminCp.cshtml";
+}
+
+
+<div class="profile-body" style="width: 450px;">
+    <form class="ui form" asp-action="EditProfile">
+        <table class="ui celled table">
+
+            <tbody>
+                <tr>
+                    <th scope="row">Phone number</th>
+                    <td>
+                        <div class="field">
+                            <input asp-for="PhoneNumber" placeholder="Phone Number" value=@Model.PhoneNumber>
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <th scope="row">Email</th>
+                    <td>
+                        <div class="field">
+                            <input asp-for="Email" placeholder="Email" value=@Model.Email>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Firstname</th>
+                    <td>
+                        <div class="field">
+                            <input asp-for="UserInfo.FirstName" placeholder="Firstname" value=@Model.UserInfo.FirstName>
+                            <span asp-validation-for="UserInfo.FirstName" class="text-danger"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Lastname</th>
+                    <td>
+                        <div class="field">
+                            <input asp-for="UserInfo.LastName" placeholder="Lastname" value="@Model.UserInfo.LastName">
+                            <span asp-validation-for="UserInfo.LastName" class="text-danger"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Sex</th>
+                    <td>
+                        <div class="field">
+                            <select asp-for="UserInfo.Sex">
+                                @if (Model.UserInfo.Sex == "Male")
+                                {
+                                    <option selected value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                }
+                                else
+                                {
+                                    <option value="Male">Male</option>
+                                    <option selected value="Female">Female</option>
+                                }
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Passport ID</th>
+                    <td>
+                        <div class="field">
+                            <input asp-for="UserInfo.PassportId" placeholder="Passport ID" value="@Model.UserInfo.PassportId">
+                            <span asp-validation-for="UserInfo.PassportId" class="text-danger"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">City</th>
+                    <td>
+                        <div class="field">
+                            <select asp-for="UserInfo.City">
+                                <option disabled="disabled" selected="selected">@Model.UserInfo.City</option>
+                                @foreach (var el in ViewBag.Cities as List<string>)
+                                {
+                                    <option value="@el">@el</option>
+                                }
+                            </select>
+                            <div class="select-dropdown"></div>
+                            <span asp-validation-for="UserInfo.City" class="text-danger"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Address</th>
+                    <td>
+                        <div class="field">
+                            <input asp-for="UserInfo.Address" placeholder="Address" value="@Model.UserInfo.Address">
+                            <span asp-validation-for="UserInfo.Address" class="text-danger"></span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button class="ui inverted primary button" type="submit">Save</button>
+        <a class="ui inverted red button" asp-controller="Admin" asp-action="Profile">Cancel</a>
+    </form>
+
+
+
+</div>

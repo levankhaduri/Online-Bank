@@ -1,0 +1,80 @@
+﻿@model AcademyBank.Models.TransactionsHistory
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_LayoutAdminCp.cshtml";
+}
+
+<div class="profile-body" style="width: 450px;">
+    <table class="ui celled table">
+
+        <thead>
+            <tr>
+                <th>Sender</th>
+                <th></th>
+                <th>Recipient</th>
+                <th></th>
+                <th>Transaction Details</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <th scope="row">Fullname</th>
+                <td>@Model.Account.User.UserInfo.FirstName @Model.Account.User.UserInfo.LastName</td>
+
+                <th>Fullname</th>
+                <td>@Model.RecipientAccount.User.UserInfo.FirstName @Model.RecipientAccount.User.UserInfo.LastName</td>
+
+                <th>Description</th>
+                <td>@Model.Description</td>
+            </tr>
+            <tr>
+                <th scope="row">Email</th>
+                <td>@Model.Account.User.Email</td>
+
+                <th scope="row">Email</th>
+                <td>@Model.RecipientAccount.User.Email</td>
+
+                <th>Ammount</th>
+                <td>@Model.Amount  @Model.Currency</td>
+            </tr>
+            <tr>
+                <th scope="row">Phone</th>
+                <td>@Model.Account.User.PhoneNumber</td>
+
+                <th scope="row">Phone</th>
+                <td>@Model.RecipientAccount.User.PhoneNumber</td>
+                
+
+                <th>Date</th>
+                <td>@Model.Date.ToShortDateString()</td>
+            </tr>
+            <tr>
+                <th scope="row">Passport ID</th>
+                <td>@Model.Account.User.UserInfo.PassportId</td>
+
+
+                <th scope="row">Passport ID</th>
+                <td>@Model.RecipientAccount.User.UserInfo.PassportId</td>
+
+
+                <th>Time</th>
+                <td>@Model.Date.ToShortTimeString()</td>
+            </tr>
+            <tr>
+                <th scope="row">Account name</th>
+                <td>@Model.Account.AccountName</td>
+
+                <th scope="row">Account name</th>
+                <td>@Model.RecipientAccount.AccountName</td>
+
+            </tr>
+            
+        </tbody>
+    </table>
+
+
+    <a class="ui inverted primary button" asp-action="TransactionsHistory" asp-controller="Admin">Back</a>
+</div>
+

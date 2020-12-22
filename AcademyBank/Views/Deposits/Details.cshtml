@@ -1,0 +1,86 @@
+﻿@model AcademyBank.Models.Deposit
+@{
+    ViewData["Title"] = "Details";
+    Layout = "_LayoutAuthenticated";
+}
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="~/css/Deposits/DepositsDetails.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body style="background-color:#f1f1f1">
+    <h1 class="title">Deposit details</h1>
+    <div class="main_border">
+        <div>
+            <div style="display: flex;">
+                <div class="circle">
+                    <div class="circle inside-circle">@Html.DisplayFor(model => model.Annual)%</div>
+                </div>
+                <div class="description">
+                    <h3 class="title">@Html.DisplayFor(model => model.Name)</h3>
+                    <p style="font-size: 20px;">
+                        Perfect solution for those who want to save the funds with maximum profit. Deposit without replenishment and partial withdrawl with interest payment at the end of the period. You can be sure that your funds will bring you income in form of accured interest.
+                    </p>
+                </div>
+            </div>
+            <div class="order-div">
+                <div style="width: 55%;">
+                    <ul style="font-size: 20px; margin-left: 5%;">
+                        <li>Bonus rate for opening deposit in ACADEMYBANK online for the first month: @Html.DisplayFor(model => model.Bonus)% </li>
+                    </ul>
+                </div>
+                <div style="margin-left: 26%; margin-top: 2%;">
+                    <a class="btn btn-primary" asp-action="Create" asp-controller="Deposits" asp-route-Id="@Model.Id">OPEN DEPOSIT</a>
+                </div>
+            </div>
+            <div style="display: flex;">
+                <div class="benefits">
+                    <h4>GENERAL INFORMATION</h4>
+                    <div class="inside-benefits">
+                        <h5 style="padding: 3% 2%; padding-top: 2%;">Benefits:</h5>
+                        <ul style="font-size: 18px;">
+                            <li style="margin: 1% 0;">simple and transparent conditions and terms in the popular stable Bank</li>
+                            <li style="margin: 1% 0;">possibility to select optimal payment</li>
+                            <li style="margin: 1% 0;">fixed interest rate for the entire financing period</li>
+                            <li style="margin: 1% 0;">payment of interest and fee only for the loan utilization period</li>
+                            <li style="margin: 1% 0;">early repayment without penalties</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="conditions">
+                    <h4>GENERAL CONDITIONS</h4>
+                    <div class="inside-conditions">
+                        <div style="padding: 2%; width: 50%;">
+                            <label>Deposit currency</label>
+                            <br/>
+                            <label>Interest Payment Date </label>
+                            <br />
+                            <label>Minimum deposit amount </label>
+                            <br />
+                            <label>Minimum replanishment amount </label>
+                            <br />
+                            <label>Maximum deposit amount </label>
+                            <br />
+                        </div>
+                        <div style="padding: 2%; width: 30%;">
+                            <label>@Html.DisplayFor(model => model.Currency)</label>
+                            <br />
+                            <label>@Html.DisplayFor(model => model.InterestPaymentDate)</label>
+                            <br />
+                            <label>@Html.DisplayFor(model => model.MinAmount)</label>
+                            <br />
+                            <label>@Html.DisplayFor(model => model.Replenishment)</label>
+                            <br />
+                            <label>@Html.DisplayFor(model => model.MaxAMount)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<br />
+<br />
+<br />

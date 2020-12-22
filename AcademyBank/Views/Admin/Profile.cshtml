@@ -1,0 +1,57 @@
+﻿@model AcademyBank.Models.User
+
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_LayoutAdminCp.cshtml";
+
+}
+
+    <h4 class="ui horizontal divider header">
+        @Model.UserInfo.FirstName @Model.UserInfo.LastName
+    </h4>
+
+
+<div class="profile-body" style="width: 450px;">
+    <table class="ui celled table">
+
+        <tbody>
+            <tr>
+                <th scope="row">Phone number</th>
+                <td> @Model.PhoneNumber </td>
+            </tr>
+            <tr>
+                <th scope="row">Email</th>
+                <td>@Model.Email</td>
+
+            </tr>
+            <tr>
+                <th scope="row">Firstname</th>
+                <td>@Model.UserInfo.FirstName</td>
+            </tr>
+            <tr>
+                <th scope="row">Lastname</th>
+                <td>@Model.UserInfo.LastName</td>
+            </tr>
+            <tr>
+                <th scope="row">Sex</th>
+                <td>@Model.UserInfo.Sex</td>
+            </tr>
+            <tr>
+                <th scope="row">Passport ID</th>
+                <td>@Model.UserInfo.PassportId</td>
+            </tr>
+            <tr>
+                <th scope="row">City</th>
+                <td>@Model.UserInfo.City</td>
+            </tr>
+            <tr>
+                <th scope="row">Address</th>
+                <td>@Model.UserInfo.Address</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <a class="ui inverted primary button" asp-controller="Admin" asp-action="EditProfile">Edit Profile</a>
+</div>
+

@@ -1,0 +1,90 @@
+﻿@model AcademyBank.Models.UserInfo
+@{
+    Layout = "_LayoutAuthenticated";
+}
+
+
+<head>
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/main.css")">
+</head>
+
+
+<div class="container">
+    <div class="row">
+        <!-- edit form column -->
+        <div class="col-md-9 personal-info">
+            <h3>Profile settings</h3>
+
+            <form method="post" asp-action="ProfileSettings" class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">First name:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="text" value="@Model.FirstName" disabled>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Last name:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="text" value="@Model.LastName" disabled>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Email:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="email" value="@ViewBag.Email" disabled>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Phone Number:</label>
+                    <div class="col-md-8">
+                        <input class="form-control" type="text" value="@User.Identity.Name" disabled>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Address:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="text" value="@Model.Address" disabled>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Current Password:</label>
+                    <div class="col-md-8">
+                        <input id="password-field" class="form-control" type="password" name="oldPassword">
+                        <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Confirm password:</label>
+                    <div class="col-md-8">
+                        <input id="password-field" class="form-control" type="password" name="newPassword">
+                        <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-8">
+                        <a type="button" class="btn btn-outline-danger" asp-controller="Cards" asp-action="AccountsAndCards">Back</a>
+                        <span></span>
+                        <button type="submit" class="btn btn-outline-success">Save Changes</button>
+                    </div>
+                    <div class="login100-form-title p-b-4" style="color: red;
+                                                                    font-size: 1.12vw;
+                                                                    font:bold">
+                        @Html.Raw(ViewBag.ErrorMessage)
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div style="width:100%" class="col-md-3">
+            <img src="~/images/ProfilePhotos/@Model.ImageName" alt="Alternate Text" width="200px" height="200px" />
+            <form action="/User/uploadPhoto" style="width:100%" method="post" enctype="multipart/form-data">
+                <input class="form-control" type="file" name="image" style="background-color:transparent; width:100%; margin-left:-5%" />
+                <input class ="btn btn-outline-primary" type="submit" value="upload"/>
+            </form>
+
+        </div>
+    </div>
+</div>
+<hr>
+
+<script src="@Url.Content("~/js/main.js")"></script>

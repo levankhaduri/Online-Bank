@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200323183321_UpdateTermColumns.cs" />
+    <Compile Remove="Migrations\20200323183321_UpdateTermColumns.Designer.cs" />
+    <Compile Remove="Migrations\20200326174654_RemoveReplenishmentCol.cs" />
+    <Compile Remove="Migrations\20200326174654_RemoveReplenishmentCol.Designer.cs" />
+    <Compile Remove="Migrations\20200326175750_Finally.cs" />
+    <Compile Remove="Migrations\20200326175750_Finally.Designer.cs" />
+    <Compile Remove="Migrations\20200330200311_SeedMigartion.cs" />
+    <Compile Remove="Migrations\20200330200311_SeedMigartion.Designer.cs" />
+    <Compile Remove="Migrations\20200331100536_SeedSMT.cs" />
+    <Compile Remove="Migrations\20200331100536_SeedSMT.Designer.cs" />
+    <Compile Remove="Migrations\20200401103101_AddProps.cs" />
+    <Compile Remove="Migrations\20200401103101_AddProps.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebPages" Version="3.2.6" />
+    <PackageReference Include="Microsoft.AspNet.WebPages.WebData" Version="3.2.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="3.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="NetEscapades.Extensions.Logging.RollingFile" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AcademyBank.Models\AcademyBank.Models.csproj" />
+  </ItemGroup>
+
+</Project>

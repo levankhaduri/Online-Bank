@@ -1,0 +1,87 @@
+﻿
+@{
+    Layout = "_LayoutAdminCp";
+
+}
+
+<h3 class="ui horizontal divider header">
+    Reports
+</h3>
+
+<div style="margin:auto; width:1000px;">
+    <table class="ui sortable celled table" style="text-align:center;">
+        <thead>
+            <tr>
+                <th>Report Type </th>
+                <th>Description</th>
+                <th>Generate </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Login Report</td>
+                <td>
+                    <div style="width:300px;text-align:start;margin:auto">
+                        <ul style="list-style:circle;">
+                            <li>How many times the user logs in</li>
+                            <li>Last login date</li>
+                            <li>Average login times per day</li>
+                            <li>Login times per month</li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <a class="ui inverted brown button" asp-controller="Admin" asp-action="LoginReport">Generate</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Counters Report</td>
+                <td>
+                    <div style="width:300px;text-align:start;margin:auto">
+                        <ul style="list-style:circle;">
+                            <li>deposit filter parameters</li>
+                            <li>loan filter parameters</li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <a class="ui inverted brown button" asp-controller="Admin" asp-action="CountersReport">Generate</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Filters report</td>
+                <td>
+                    <div style="width:300px;text-align:start;margin:auto">
+                        <ul style="list-style:circle;">
+                            <li>how many times the user visited Deposits page</li>
+                            <li>how many times the user visited Loans page</li>
+                            <li>how many times the user visited Cards page</li>
+                            <li>how many times the user visited Account page</li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <a class="ui inverted brown button" asp-controller="Admin" asp-action="FiltersReport">Generate</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Transfers Report</td>
+                <td>
+                    <div style="width:300px;text-align:start;margin:auto">
+                        <ul style="list-style:circle;">
+                            <li>how much money the user spent from acc per month</li>
+                            <li>how much money the user received on acc per month</li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <a class="ui inverted brown button" asp-controller="Admin" asp-action="TransfersReport">Generate</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

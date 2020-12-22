@@ -1,0 +1,88 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Admin Panel</title>
+    <meta name="description" content="Dashboard UI Kit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    @*<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">*@
+    <link rel='icon' href='~/images/abico.ico' type='image/x-icon' />
+    <link rel="stylesheet" href="~/css/AdminPanel/AdminPanelDefStyles.css" />
+    <link rel="stylesheet" href="~/css/AdminPanel/AdminPanelHomeStyles.css" />
+
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+</head>
+<body class="o-page">
+    <!--[if lte IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+
+    <div class="o_page_sidebar">
+        <div class="c_sidebar">
+            <partial name="_AdminPanelMenuPartial" />
+        </div>
+    </div>
+
+
+    <main class="o_page_content">
+        <header class="c-navbar">
+            <h2 class="c-navbar__title u-mr-auto">Admin panel</h2>
+
+            @*<div class="c-navbar__profile">
+
+                <div class="c-dropdown dropdown">
+                    <a class="c-avatar c-avatar--xsmall has-dropdown dropdown-toggle" href="#" id="dropdwonMenuAvatar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="no_avatar">P</span>
+                    </a>
+
+                    <div class="c-dropdown__menu dropdown-menu dropdown-menu-right" aria-labelledby="dropdwonMenuAvatar">
+                        <a class="c-dropdown__item dropdown-item" href="#">Profile</a>
+                        <a class="c-dropdown__item dropdown-item" href="#">View Activity</a>
+                        <a class="c-dropdown__item dropdown-item" href="#">Log Out</a>
+                    </div>
+                </div>
+
+            </div>*@
+        </header>
+        <div class="rendered-body" style="margin-left: 10px; margin-right: 10px; margin-top: 10px;">
+            @RenderBody()
+        </div>
+
+    </main>
+
+    <script src="~/js/AdminPanel/all.js" asp-append-version="true"></script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="~/js/AdminPanel/jquery.dataTablesJS.min.js" asp-append-version="true"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+
+</body>
+</html>

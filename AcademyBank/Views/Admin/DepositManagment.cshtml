@@ -1,0 +1,79 @@
+﻿@model PagedList.IPagedList<AcademyBank.Models.Deposit>
+@using PagedList;
+@using PagedList.Mvc;
+@using AcademyBank.Web.Models;
+@{
+	ViewData["Title"] = "DepositManagment";
+	Layout = "~/Views/Shared/_LayoutAdminCp.cshtml";
+	int id = 0;
+
+	var currentPage = (ViewContext.HttpContext.Request.Query["page"].Count == 0)
+		? 1
+		: int.Parse(ViewContext.HttpContext.Request.Query["page"]);
+
+	int counter = (Model.PageSize * (currentPage - 1)) + 1;
+
+	var urlParamOrdervalue = ViewContext.HttpContext.Request.Query["orderBy"];
+}
+
+
+<a style="margin-left:10px; margin-top: 10px;" class="ui inverted green button" asp-action="AddDeposit">+Add new deposit</a>
+
+<h4 class="ui horizontal divider header">
+	Deposits
+</h4>
+
+
+<table class="ui celled table">
+	<thead>
+		<tr>
+			<th scope="col">№</th>
+			@{
+				Html.RenderPartial("~/Views/Partials/_AdminTableSortablePartial.cshtml", new List<TablePartialModel> {
+					new TablePartialModel { UrlParamOrdervalue = urlParamOrdervalue, Order = "Name", OrderDesc="NameDesc", DisplayName = "Name",Action = "DepositManagment", Controller = "Admin", CurrentPage =currentPage },
+					new TablePartialModel { UrlParamOrdervalue = urlParamOrdervalue, Order = "Description", OrderDesc="DescriptionDesc", DisplayName = "Description",Action = "DepositManagment", Controller = "Admin", CurrentPage =currentPage },
+					new TablePartialModel { UrlParamOrdervalue = urlParamOrdervalue, Order = "Benefits", OrderDesc="BenefitsDesc", DisplayName = "Benefits",Action = "DepositManagment", Controller = "Admin", CurrentPage =currentPage },
+					new TablePartialModel { UrlParamOrdervalue = urlParamOrdervalue, Order = "Annual", OrderDesc="AnnualDesc", DisplayName = "Annual",Action = "DepositManagment", Controller = "Admin", CurrentPage =currentPage },
+					new TablePartialModel { UrlParamOrdervalue = urlParamOrdervalue, Order = "Bonus", OrderDesc="BonusDesc", DisplayName = "Bonus",Action = "DepositManagment", Controller = "Admin", CurrentPage =currentPage },
+					new TablePartialModel { UrlParamOrdervalue = urlParamOrdervalue, Order = "InterestPaymentDate", OrderDesc="InterestPaymentDateDesc", DisplayName = "Int. paym. date",Action = "DepositManagment", Controller = "Admin", CurrentPage =currentPage },
+					new TablePartialModel { UrlParamOrdervalue = urlParamOrdervalue, Order = "MinAmount", OrderDesc="MinAmountDesc", DisplayName = "Min ammount",Action = "DepositManagment", Controller = "Admin", CurrentPage =currentPage },
+					new TablePartialModel { UrlParamOrdervalue = urlParamOrdervalue, Order = "MaxAmount", OrderDesc="MaxAmountDesc", DisplayName = "Max ammount",Action = "DepositManagment", Controller = "Admin", CurrentPage =currentPage },
+					new TablePartialModel { UrlParamOrdervalue = urlParamOrdervalue, Order = "Replenishment", OrderDesc="ReplenishmentDesc", DisplayName = "Replenishment",Action = "DepositManagment", Controller = "Admin", CurrentPage =currentPage }
+					});
+			}
+			<th scope="col">Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+
+
+
+		@foreach (var item in Model)
+		{
+			id = item.Id;
+			<tr>
+				<th scope="row">@(counter++)</th>
+				<td>@Html.DisplayFor(modelItem => item.Name)</td>
+				<td>@Html.DisplayFor(modelItem => item.Description)</td>
+				<td>@Html.DisplayFor(modelItem => item.Benefits)</td>
+				<td>@Html.DisplayFor(modelItem => item.Annual)</td>
+				<td>@Html.DisplayFor(modelItem => item.Bonus)</td>
+				<td>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.InterestPaymentDate))</td>
+				<td>@Html.DisplayFor(modelItem => item.MinAmount)</td>
+				<td>@Html.DisplayFor(modelItem => item.MaxAMount)</td>
+				<td>@Html.DisplayFor(modelItem => item.Replenishment)</td>
+
+				<td>
+					<a asp-action="EditDeposit" asp-controller="Admin" asp-route-id="@item.Id" data-tooltip="Edit" data-position="bottom center" class="edit-icon"><i class="edit icon"></i></a> 
+					<a data-id="@id" data-tooltip="Delete" data-position="bottom center" class="myBtn delete-icon"><i class="trash icon"></i></a>
+				
+			</tr>
+		}
+	</tbody>
+</table>
+
+<hr />
+
+@Html.Partial("~/Views/Partials/_TablePagingFooterPartial.cshtml", new TablePagingModel { Action = "DepositManagment", Controller = "Admin", UrlParamOrdervalue = urlParamOrdervalue, CurrentPage = currentPage, PageCount = Model.PageCount })
+
+<partial name="_PopUpWindowForDeleteButtons" model='new PopUpWindowViewModel() {ControllerName="Admin",ActionName="DeleteDeposit",MainAction="DepositManagment",Id=id }' />

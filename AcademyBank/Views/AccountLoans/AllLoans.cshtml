@@ -1,0 +1,94 @@
+﻿@model IEnumerable<AcademyBank.Models.AccountLoan>
+@{
+    ViewData["Title"] = "AllLoans";
+    Layout = "_LayoutAuthenticated";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous" />
+    <link rel="stylesheet" href="~/css/Accounts/accounts.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="col-sm module">
+            <h4>Loans</h4>
+
+            @foreach (var item in Model)
+            {
+                <form method="post" asp-action="PayingLoans" asp-controller="AccountLoans">
+                    <input type="hidden" name="Id" value="@item.Id" />
+                    <div class="row-md">
+                        <div class="account-container">
+                            <div class="account-header">
+                                @{
+                                    List<Loan> loans = ViewBag.loans;
+                                    var loanType = loans.SingleOrDefault(x => x.Id == item.LoanId);
+                                    @loanType.Name
+                                }
+                            </div>
+
+
+                            <div class="account-content">
+                                <div class="account-label">@Html.LabelFor(modelItem => item.Currency):</div>
+                                <div class="account-value">@Html.DisplayFor(modelItem => item.Currency)</div>
+
+                                <div class="account-label">@Html.LabelFor(modelItem => item.Employment):</div>
+                                <div class="account-value">@Html.DisplayFor(modelItem => item.Employment)</div>
+
+                                <div class="account-label">@Html.LabelFor(modelItem => item.Status):</div>
+                                <div class="account-value">@Html.DisplayFor(modelItem => item.Status)</div>
+
+                                <div class="account-label">@Html.LabelFor(modelItem => item.Sum):</div>
+                                <div class="account-value">@Html.DisplayFor(modelItem => item.Sum)</div>
+
+                                <div class="account-label">@Html.LabelFor(modelItem => item.Term):</div>
+                                <div class="account-value">@Html.DisplayFor(modelItem => item.Term)</div>
+
+                                <div class="account-label">Accident Insurance</div>
+                                <div class="account-value">@loanType.AccidentInsurance</div>
+
+                                <div class="account-label">Advanced payment</div>
+                                <div class="account-value">@loanType.AdvancedPayment</div>
+
+                                <div class="account-label">Insurance</div>
+                                <div class="account-value">@loanType.InsuranceLoan</div>
+
+                                <div class="account-label">Interest rate</div>
+                                <div class="account-value">@loanType.InterestRate</div>
+
+                                <div class="account-label">Purpose</div>
+                                <div class="account-value">@loanType.Purpose</div>
+
+                                <div class="account-label">Payment schedule</div>
+                                <div class="account-value">@loanType.RepaymentSchedule</div>
+
+                                <div class="account-label">Service fee</div>
+                                <div class="account-value">@loanType.ServiceFee</div>
+
+                                <div class="account-label">Term</div>
+                                <div class="account-value">@loanType.Term</div>
+
+                                @if (item.Status.Equals("IsActive"))
+                                {
+                                    <input class="btn btn-outline-secondary col-md" type="submit" value="Pay" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                </form>
+            }
+            <a class="btn btn-dark col-md" asp-controller="AccountLoans" asp-action="Index">Request a new loan</a>
+            <hr />
+        </div>
+    </div>
+
+</body>
+</html>
+
+

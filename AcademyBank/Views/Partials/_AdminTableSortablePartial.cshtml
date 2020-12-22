@@ -1,0 +1,23 @@
+﻿@model List<AcademyBank.Web.Models.TablePartialModel>
+
+
+@foreach (var item in Model)
+{
+	@if (item.UrlParamOrdervalue != item.Order)
+	{
+
+		<th onclick="location.href='@Url.Action(item.Action, item.Controller, new { OrderBy = item.Order, page = item.CurrentPage, cardStatus = item.SelectedCardStatus })'" scope="col">
+			@item.DisplayName
+			<i class="caret up icon"></i>
+		</th>
+
+	}
+	else if (item.UrlParamOrdervalue == item.Order)
+	{
+		<th onclick="location.href='@Url.Action(item.Action, item.Controller, new { OrderBy = item.OrderDesc, page = item.CurrentPage, cardStatus = item.SelectedCardStatus })'" scope="col">
+			@item.DisplayName
+			<i class="caret down icon"></i>
+		</th>
+	}
+
+}

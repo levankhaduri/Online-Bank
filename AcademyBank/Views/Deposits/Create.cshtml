@@ -1,0 +1,91 @@
+﻿@model AcademyBank.Models.AccountDepositViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "_LayoutAuthenticated";
+}
+    <body style="background-color:#f1f1f1">
+        <h1 class=text-center>Deposit opening</h1>
+            <div class="row" style="border: 1px solid grey;
+        border-radius: 25px;">
+                <div class="col-md-6" style="margin-left:20px; margin-top:20px;">
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <input asp-for="DepositId" type="text" value="@Model.Deposit.Id" hidden/>
+                        <div class="form-group">
+                            <label class="control-label"><b>Name</b></label>
+                            <br />
+                            <label class="control-label">@Model.Deposit.Name</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Currency</label>
+                            <br />
+                            <label class="control-label">@Model.Deposit.Currency</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Term of deposit</label>
+                            <select class="form-control required" asp-for="Term">
+                                <option disabled="disabled" selected="selected">Choose Term</option>
+                                @foreach (var el in ViewBag.Term as List<string>)
+                                {
+                                    <option>@el</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Term" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Amount range</label>
+                            <label class="form-control">from @Model.Deposit.MinAmount to @Model.Deposit.MaxAMount @Model.Deposit.Currency</label>
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Deposit amount</label>
+                            <input class="form-control" asp-for="DepositAmount" min="@Model.Deposit.MinAmount" max="@Model.Deposit.MaxAMount"/>
+                            <span asp-validation-for="DepositAmount" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Interest rate</label>
+                            <label class="control-label">@Model.Deposit.InterestRate</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Bonus rate</label>
+                            <label class="control-label">
+                                Bonus rate for opening the deposit in
+                                UKRSIB online to for the first 1 month: @Model.Deposit.Bonus %
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Interest payment</label>
+                            <label class="control-label">@Model.Deposit.InterestPaymentDate</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Replenishment possible</label>
+                            @if (Model.Deposit.Replenishment == 0)
+                            {
+                                @:<label>Yes</label>
+                            }
+                            else
+                            {
+                                @:<label>No</label>
+                            }
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Account to transfer funds from</label>
+                            <select class="form-control" asp-for="AccountId" asp-items="ViewBag.AccountId"></select>
+                            <span asp-validation-for="AccountId" class="text-danger"></span>
+                            <input asp-for="Status" value="@ViewBag.Status" hidden/>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Open deposit" class="btn btn-info" style="margin-left:900px" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+    </body>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

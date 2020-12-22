@@ -1,0 +1,80 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using AcademyBank.BLL.Services.Interfaces
+@inject UserManager<AcademyBank.Models.User> userManager
+@inject IUserInfoService  _IuserInfoService
+@{
+    var user = await userManager.GetUserAsync(User);
+    var userInfo = await _IuserInfoService.GetById(user.Id);
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] TBC Academy Bank</title>
+    <link rel='icon' href='~/images/abico.ico' type='image/x-icon' />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/SweetAlert/sweetalert.css" />
+    <script src="~/js/SweetAlert/sweetalert.js"></script>
+    <script src="~/js/SweetAlert/sweetalert.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav style="width: 100%;justify-content: center;" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom-0 box-shadow mb-5" />
+        <img style="height: 40px; margin-left: 15px;" src="~/images/academylogo.png" />
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <ul class="navbar-nav flex-grow-1 justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link @(Context.Request.Path.Value.Contains("AccountsAndCards") ? "active" : " " )" asp-area="" asp-controller="Cards" asp-action="AccountsAndCards">Cards</a>
+                    </li>
+                    <li class="nav-item nav-link">|</li>
+                    <li class="nav-item">
+                        <a class="nav-link @(Context.Request.Path.Value.Contains("/Accounts/") ? "active" : " " )" asp-area="" asp-controller="Accounts" asp-action="Index">Accounts</a>
+                    </li>
+                    <li class="nav-item nav-link">|</li>
+                    <li class="nav-item">
+                        <a class="nav-link @(Context.Request.Path.Value.Contains("TransferAndPayment") ? "active" : " " )" asp-area="" asp-controller="Cards" asp-action="TransferAndPayment">Payments And Transfers</a>
+                    </li>
+                    <li class="nav-item nav-link">|</li>
+                    <li class="nav-item">
+                        <a class="nav-link @(Context.Request.Path.Value.Contains("Deposits") ? "active" : " " )" asp-area="" asp-controller="Deposits" asp-action="Index">Deposits</a>
+                    </li>
+                    <li class="nav-item nav-link">|</li>
+                    <li class="nav-item">
+                        <a class="nav-link @(Context.Request.Path.Value.Contains("AccountLoans") ? "active" : " " )" asp-area="" asp-controller="AccountLoans" asp-action="Index">Loans</a>
+                    </li>
+                    <li class="nav-item nav-link">|</li>
+                    <li class="nav-item">
+                        <a class="nav-link @(Context.Request.Path.Value.Contains("User") ? "active" : " " )" asp-area="" asp-controller="User" asp-action="ProfileSettings">Profile Settings</a>
+                    </li>
+                    <li class="nav-item">
+                        <img src="~/images/ProfilePhotos/@userInfo.ImageName" alt="Alternate Text" width="40px" height="40px" style="position:absolute; right:8%" />
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-secondary btnLogout" style="position:absolute; right:2%;" asp-controller="User" asp-action="Logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        </navstyle>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @Html.Partial("../Partial/_NotificationPanel")
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,17 @@
+body {
+    background-color: #f1f1f1;
+}
+
+.accept-button {
+	margin-left: 13%;
+}
+
+.form-control {
+    border-radius: 20px;
+    width: 45%;
+}
+
+.form-group label{
+    font-weight: bold;
+    opacity: 20;
+}

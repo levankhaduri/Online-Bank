@@ -1,0 +1,97 @@
+﻿@model AcademyBank.Models.Loan
+@{
+    Layout = "_LayoutAdminCp";
+}
+<div class="addloan-form" style="width: 400px;">
+    <form asp-action="EditLoan" class="ui form">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+        <div class="field">
+            <label>Name</label>
+            <input asp-for="Name" type="text" placeholder="Name">
+        </div>
+        <div class="field">
+            <label>Percentage </label>
+            <input asp-for="Percentage" type="text" placeholder="Percentage ">
+        </div>
+        <div class="field">
+            <label>Accident Insurance</label>
+            <input asp-for="AccidentInsurance" type="text" placeholder="Accident Insurance">
+        </div>
+        <div class="field">
+            <label>Insurance Loan</label>
+            <input asp-for="InsuranceLoan" type="text" placeholder="Insurance Loan">
+        </div>
+        <div class="field">
+            <label>Service Fee</label>
+            <input asp-for="ServiceFee" type="text" placeholder="Service Fee">
+        </div>
+        <div class="field">
+            <label>Purpose</label>
+            <select asp-for="Purpose">
+               
+                    <option>@AcademyBank.Models.Enums.LoanPurposes.Alternative</option>
+                    <option>@AcademyBank.Models.Enums.LoanPurposes.ConsolidateDebt</option>
+                    <option>@AcademyBank.Models.Enums.LoanPurposes.Finance</option>
+                    <option>@AcademyBank.Models.Enums.LoanPurposes.LargePurchase</option>
+                    <option>@AcademyBank.Models.Enums.LoanPurposes.MovingExpenses</option>
+                    <option>@AcademyBank.Models.Enums.LoanPurposes.UnplannedExpenses</option>
+
+            </select>
+            
+            @*<input type="text" asp-for="Purpose" placeholder="Purpose">*@
+        </div>
+        <div class="field">
+            <label>Term (months)</label>
+            <select asp-for="Term">
+                <option>@AcademyBank.Models.Enums.Term.Six</option>
+                <option>@AcademyBank.Models.Enums.Term.Nine</option>
+                <option>@AcademyBank.Models.Enums.Term.Twelve</option>
+                <option>@AcademyBank.Models.Enums.Term.Yearhalf</option>
+                <option>@AcademyBank.Models.Enums.Term.Twoyear</option>
+            </select>
+            @*<select asp-for="Term">
+                @for (int i = 6; i <= 120; i++)
+                {
+                    <option>@i</option>
+                }
+
+            </select>*@
+            @*<input type="text" asp-for="Term" placeholder="Term">*@
+        </div>
+        <div class="field">
+            <label>Currency</label>
+            <select asp-for="Currency">
+                <option>GEL</option>
+                <option>USD</option>
+                <option>EUR</option>
+            </select>
+            @*<input type="text" asp-for="Currency" placeholder="Currency">*@
+        </div>
+        <div class="field">
+            <label>Repayment Schedule (months)</label>
+            <select asp-for="RepaymentSchedule">
+                @for (int i = 7; i <= 119; i++)
+                {
+                    <option>@i</option>
+                }
+            </select>
+            @*<input type="text" asp-for="RepaymentSchedule" placeholder="Repayment Schedule">*@
+        </div>
+        <div class="field">
+            <label>Advanced Payment </label>
+            <input asp-for="AdvancedPayment" type="text" placeholder="Advanced Payment " value="0" required>
+        </div>
+
+
+        <input class="ui inverted green button" type="submit" asp-route-id="@Model.Id" value="Save" />
+        <a class="ui inverted red button" asp-controller="Admin" asp-action="LoansManagment">Cancel</a>
+    </form>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="@Url.Content("~/js/global.js")"></script>

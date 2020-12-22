@@ -1,0 +1,7 @@
+﻿[*.cs]
+
+# RCS1102: Make class static.
+dotnet_diagnostic.RCS1102.severity = none
+
+# RCS1036: Remove redundant empty line.
+dotnet_diagnostic.RCS1036.severity = error

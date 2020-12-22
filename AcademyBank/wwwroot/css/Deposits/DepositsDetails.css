@@ -1,0 +1,60 @@
+﻿body {
+    background-color: #808080;
+}
+.title {
+    margin-left: 40%;
+}
+.main_border {
+   border: 2px #007bff59 solid;
+   margin: 0 2%;
+   border-radius: 7px;
+}
+.circle {
+    border: 3px #f1f1f1 solid;
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+    margin: 1%;
+    margin-right: 5%;
+}
+.circle .inside-circle {
+    background-color: #ffffff;
+    border: 3px #4e7bfe solid;
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+    margin: 1%;
+    margin-right: 5%;
+    font-size: 26px;
+    font-weight: bold;
+    padding: 30%;
+    line-height: 3em;
+}
+.description {
+    width: 75%;
+    margin-top: 2%;
+}
+.order-div {
+    display: flex;
+    border: 3px #007bff9e solid;
+    border-style: double;
+}
+.benefits {
+    width: 50%;
+    padding: 1%;
+    list-style-position: inside;
+}
+.inside-benefits {
+    border: 1px #5ca8fa solid;
+    height: 310.91px;
+    padding: 10px;
+}
+.conditions {
+    width: 60%;
+    padding: 1%;
+    list-style-position: inside;
+}
+.inside-conditions {
+    display: flex;
+    border: 1px #5ca8fa solid;
+}

@@ -1,0 +1,229 @@
+﻿
+@model AcademyBank.Models.User
+@{
+	ViewData["Title"] = "Profile";
+	Layout = "~/Views/Shared/_LayoutAdminCp.cshtml";
+}
+
+<a class="ui inverted primary button" asp-controller="Admin" asp-action="ActiveUsers">Back</a>
+<a class="ui inverted red button" asp-controller="Admin" asp-action="BlockUser" asp-route-id="@Model.Id">Block user</a>
+
+
+<h4 class="ui horizontal divider header">
+	User Info
+	@if (!Model.IsBanned)
+	{
+		<sup style="color:limegreen;">ACTIVE</sup>
+	}
+
+</h4>
+
+<div class="profile-body" style="width: 450px;">
+	<table class="ui celled table">
+
+		<tbody>
+
+			<tr>
+				<th scope="row">Firstname</th>
+				<td>@Model.UserInfo.FirstName</td>
+
+				<th scope="row">Phone number</th>
+				<td> @Model.PhoneNumber </td>
+
+			</tr>
+			<tr>
+				<th scope="row">Lastname</th>
+				<td>@Model.UserInfo.LastName</td>
+
+				<th scope="row">Email</th>
+				<td>@Model.Email</td>
+			</tr>
+			<tr>
+				<th scope="row">Sex</th>
+				<td>@Model.UserInfo.Sex</td>
+
+				<th scope="row">City</th>
+				<td>@Model.UserInfo.City</td>
+			</tr>
+			<tr>
+				<th scope="row">Passport ID</th>
+				<td>@Model.UserInfo.PassportId</td>
+
+				<th scope="row">Address</th>
+				<td>@Model.UserInfo.Address</td>
+			</tr>
+
+		</tbody>
+	</table>
+
+
+</div>
+
+
+<h4 class="ui horizontal divider header">
+	Accounts
+	<span> (@ViewBag.CustomUserAccountsCount)</span>
+
+</h4>
+
+
+<table class="ui celled table">
+	<thead>
+		<tr>
+			<th scope="col">Account name</th>
+			<th scope="col">Balance</th>
+			<th scope="col">Account Number</th>
+
+		</tr>
+	</thead>
+	<tbody>
+
+		@foreach (var account in Model.Accounts)
+		{
+			<tr>
+				<td>@account.AccountName</td>
+				<td>@account.Balance</td>
+				<td>@account.AccountNumber</td>
+			</tr>
+		}
+
+
+	</tbody>
+</table>
+
+
+
+
+<h4 class="ui horizontal divider header">
+	Cards
+	<span> (@ViewBag.CustomUserCardsCount)</span>
+
+</h4>
+
+<table class="ui celled table">
+	<thead>
+		<tr>
+			<th scope="col">Card number</th>
+			<th scope="col">Created at</th>
+			<th scope="col">Expire date</th>
+			<th scope="col">Card type</th>
+			<th scope="col">CCV</th>
+			<th scope="col">status</th>
+
+
+		</tr>
+	</thead>
+	<tbody>
+
+		@foreach (var cards in ViewData["CustomUserCards"] as List<Card>)
+		{
+			<tr>
+				<td>@cards.CardNumber</td>
+				<td>@cards.CreatedAt.ToShortDateString()</td>
+				<td>@cards.ExpireDate.ToShortDateString()</td>
+				<td>@cards.CardType</td>
+				<td>@cards.CCV</td>
+				<td>@cards.Status</td>
+			</tr>
+		}
+
+
+	</tbody>
+</table>
+
+
+
+
+
+<h4 class="ui horizontal divider header">
+	Loans
+	<span> (@ViewBag.CustomUserLoansCount)</span>
+
+</h4>
+
+
+
+<table class="ui celled table">
+	<thead>
+		<tr>
+			<th scope="col">Name</th>
+			<th scope="col">Percentage</th>
+			<th scope="col">Accidant insurance</th>
+			<th scope="col">InsuranceLoan </th>
+			<th scope="col">Service fee </th>
+			<th scope="col">Sum</th>
+			<th scope="col">Currenct</th>
+			<th scope="col">Status</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		@foreach (var loan in ViewData["CustomUserLoans"] as List<AccountLoan>)
+		{
+			<tr>
+				<td>@loan.Loan.Name</td>
+				<td>@loan.Loan.Percentage</td>
+				<td>@loan.Loan.AccidentInsurance</td>
+				<td>@loan.Loan.InsuranceLoan</td>
+				<td>@loan.Loan.ServiceFee</td>
+				<td>@loan.Sum</td>
+				<td>@loan.Currency</td>
+				<td>@loan.Status</td>
+
+
+			</tr>
+		}
+
+
+	</tbody>
+</table>
+
+
+
+<h4 class="ui horizontal divider header">
+	Deposits
+	<span> ( @ViewBag.CustomUserDepositsCount)</span>
+
+</h4>
+
+
+
+
+
+<table class="ui celled table" style="margin-bottom=15px">
+	<thead>
+		<tr>
+			<th scope="col">Name</th>
+			<th scope="col">Description</th>
+			<th scope="col">Benefits</th>
+			<th scope="col">Annual</th>
+			<th scope="col">Bonus</th>
+			<th scope="col">Interest Payment Date</th>
+			<th scope="col">Replanishment</th>
+			<th scope="col">Amount</th>
+			<th scope="col">Status</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		@{int i = 0;}
+
+		@foreach (var item in ViewData["CustomUserDeposits"] as List<AccountDeposit>)
+		{
+			<tr>
+				<td>@item.Deposit.Name</td>
+				<td>@item.Deposit.Description</td>
+				<td>@item.Deposit.Benefits</td>
+				<td>@item.Deposit.Annual</td>
+				<td>@item.Deposit.Bonus</td>
+				<td>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Deposit.InterestPaymentDate))</td>
+				<td>@item.Deposit.Replenishment</td>
+				<td>@item.DepositAmount</td>
+				<td>@item.Status</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+
+

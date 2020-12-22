@@ -1,0 +1,175 @@
+﻿@model AcademyBank.Models.Account
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "_LayoutAuthenticated";
+}
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous" />
+    <link rel="stylesheet" href="~/css/Accounts/accounts.css" />
+</head>
+
+<body>
+    <div>
+        <a class="btn btn-outline-dark" asp-action="Index">Back to List</a>
+    </div>
+    <br />
+    <div>
+        <h1>Account Details</h1>
+        <hr />
+        <dl class="row">
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Balance)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Balance)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.AccountName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.AccountName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.AccountNumber)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.AccountNumber)
+            </dd>
+        </dl>
+    </div>
+
+    <div class="container">
+
+        <h4>Cards</h4>
+        @foreach (var item in Model.Cards)
+        {
+            <div class="row module">
+                <div class="col-md">
+                    <a asp-controller="Cards" asp-action="Details" asp-route-id="@item.Id">
+                        <div class="account-container clickable">
+                            <div class="account-header">
+                                @Html.DisplayFor(modelItem => item.CardType)
+                            </div>
+
+                            <div class="account-content">
+                                <div class="account-label">@Html.LabelFor(modelItem => item.CardNumber):</div>
+                                <div class="account-value">@Html.DisplayFor(modelItem => item.CardNumber)</div>
+
+                                <div class="account-label">@Html.LabelFor(modelItem => item.CardType):</div>
+                                <div class="account-value">@Html.DisplayFor(modelItem => item.CardType)</div>
+
+                                <div class="account-label">@Html.LabelFor(modelItem => item.Status):</div>
+                                <div class="account-value">@Html.DisplayFor(modelItem => item.Status)</div>
+
+                                <div class="account-label">@Html.LabelFor(modelItem => item.ExpireDate):</div>
+                                <div class="account-value">@Html.DisplayFor(modelItem => item.ExpireDate)</div>
+
+
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <br />
+        }
+        <a class="btn btn-dark col-md" asp-controller="Cards" asp-action="AccountsAndCards">Request a new card</a>
+        <hr />
+
+        <br />
+
+        <div class="row">
+
+            <div class="col-sm module">
+                <h4>Loans</h4>
+
+                @foreach (var item in Model.AccountLoans)
+                {
+                    <div class="row-md">
+                        <a asp-controller="AccountLoans" asp-action="Details" asp-route-id="@item.Id">
+                            <div class="account-container clickable">
+                                <div class="account-header">
+                                    @{
+                                        List<Loan> loans = ViewBag.loans;
+                                        @loans.SingleOrDefault(x => x.Id == item.LoanId).Name
+                                    }
+                                </div>
+
+                                <div class="account-content">
+                                    <div class="account-label">@Html.LabelFor(modelItem => item.Currency):</div>
+                                    <div class="account-value">@Html.DisplayFor(modelItem => item.Currency)</div>
+
+                                    <div class="account-label">@Html.LabelFor(modelItem => item.Employment):</div>
+                                    <div class="account-value">@Html.DisplayFor(modelItem => item.Employment)</div>
+
+                                    <div class="account-label">@Html.LabelFor(modelItem => item.Status):</div>
+                                    <div class="account-value">@Html.DisplayFor(modelItem => item.Status)</div>
+
+                                    <div class="account-label">@Html.LabelFor(modelItem => item.Sum):</div>
+                                    <div class="account-value">@Html.DisplayFor(modelItem => item.Sum)</div>
+
+                                    <div class="account-label">@Html.LabelFor(modelItem => item.Term):</div>
+                                    <div class="account-value">@Html.DisplayFor(modelItem => item.Term)</div>
+
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <br />
+                }
+                <a class="btn btn-dark col-md" asp-controller="AccountLoans" asp-action="Index">Request a new loan</a>
+                <hr />
+            </div>
+
+            <div class="col-sm module">
+                <h4>Deposits</h4>
+
+                @foreach (var item in Model.AccountDeposits)
+                {
+                    <div class="row-md">
+                        <a asp-controller="Deposits" asp-action="Details" asp-route-id="@item.DepositId">
+                            <div class="account-container clickable">
+                                <div class="account-header">
+                                    @{
+                                        List<Deposit> deposits = ViewBag.deposits;
+                                        @deposits.SingleOrDefault(x => x.Id == item.DepositId).Name
+                                    }
+                                </div>
+
+                                <div class="account-content">
+                                    <div class="account-label">@Html.LabelFor(modelItem => item.DepositAmount):</div>
+                                    <div class="account-value">@Html.DisplayFor(modelItem => item.DepositAmount)</div>
+
+                                    <div class="account-label">@Html.LabelFor(modelItem => item.Status):</div>
+                                    <div class="account-value">@Html.DisplayFor(modelItem => item.Status)</div>
+
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <br />
+                }
+                <a class="btn btn-dark col-md" asp-controller="Deposits" asp-action="Index">Request a new deposit</a>
+                <hr />
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+</html>
+

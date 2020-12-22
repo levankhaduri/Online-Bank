@@ -1,0 +1,60 @@
+﻿@model IEnumerable<AcademyBank.Models.Account>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_LayoutAuthenticated";
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous" />
+    <link rel="stylesheet" href="~/css/Accounts/accounts.css" />
+    <link href="https://fonts.googleapis.com/css?family=Comic+Neue|Varela+Round&display=swap" rel="stylesheet">
+</head>
+<body >
+    <h1 class="title">Your accounts</h1>
+    <p>
+        <a asp-action="Create" class="buttons MyButtons">Create New</a>
+    </p>
+    <div class="container-accounts">
+
+        @{ if (Model.Count() == 0)
+            {
+                <img src="~/images/889844.svg" class="img-cursor" alt="mouse-cursor" />
+                <h4 class="Message">you have no account right now, click 'create' to make one</h4>
+
+            } }
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="col-md">
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        <div class="account-container clickable">
+                            <div class="account-header">
+                                @Html.DisplayFor(modelItem => item.AccountName)
+                            </div>
+
+                            <div class="account-content">
+                                <div class="account-label">@Html.LabelFor(modelItem => item.AccountNumber):</div>
+                                <div class="account-value">@Html.DisplayFor(modelItem => item.AccountNumber)</div>
+
+                                <div class="account-label">@Html.LabelFor(modelItem => item.Balance):</div>
+                                <div class="account-value">@Html.DisplayFor(modelItem => item.Balance)</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <br />
+        }
+
+    </div>
+
+</body>
+</html>

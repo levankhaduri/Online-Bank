@@ -1,0 +1,80 @@
+
+@*﻿@model IEnumerable<AcademyBank.Models.Card>*@
+
+@model AcademyBank.Models.Card
+
+@{
+	ViewData["Title"] = "AddDeposit";
+	Layout = "~/Views/Shared/_LayoutAdminCp.cshtml";
+}
+
+
+<div class="addloan-form" style="width: 400px;">
+	<form class="ui form" asp-controller="Admin" asp-action="CreateCard">
+		<div class="field">
+			<label>Card Number</label>
+			<div class="ui right labeled input">
+				<input type="text" id="cardNumberInpField" asp-for="CardNumber" placeholder="Card Number">
+				<a class="ui tag label" onclick="onClickGenerator()">
+					Generate
+				</a>
+			</div>
+		</div>
+		<div class="field">
+			<label>Expire Date </label>
+			<input type="date" id="cardExpireDate" asp-for="ExpireDate" placeholder="Expire Date">
+		</div>
+		<div class="field">
+			<label>CCV</label>
+			<input type="text" id="ccvInpField" asp-for="CCV" placeholder="CCV">
+		</div>
+
+
+		<a class="ui inverted primary button" asp-controller="Admin" asp-action="CardRequests">Back</a>
+
+		<button class="ui inverted green button" type="submit">Create</button>
+		<a class="ui inverted red button" asp-controller="Admin" asp-action="RejectCard" asp-route-id="@Model.Id">Reject</a>
+	</form>
+</div>
+
+
+<script>
+
+	function onClickGenerator() {
+		let cardLongNumber = Math.round(Math.random() * 1E16);
+		let cardCCVNumber = Math.round(Math.random() * 100)
+
+
+		let lostNumbersLength = 16 - cardLongNumber.toString().length;
+		let regenerateCardLongNumber = "0".repeat(lostNumbersLength) + cardLongNumber.toString();
+
+		let regenerateCardCCVNumber = (cardCCVNumber < 10) ? "00" + cardCCVNumber.toString() : ((cardCCVNumber < 100) ? "0" + cardCCVNumber.toString() : cardCCVNumber.toString());
+
+
+
+		let currentDate = new Date();
+
+		let modifyDate = formatDate(currentDate);
+		console.log(modifyDate);
+
+
+		document.getElementById("cardNumberInpField").value = regenerateCardLongNumber;
+		document.getElementById("cardExpireDate").value = modifyDate;
+		document.getElementById("ccvInpField").value = regenerateCardCCVNumber;
+	}
+
+	function formatDate(date) {
+		var d = new Date(date),
+			month = '' + (d.getMonth() + 1),
+			day = '' + d.getDate(),
+			year = d.getFullYear() + 2;
+
+		if (month.length < 2)
+			month = '0' + month;
+		if (day.length < 2)
+			day = '0' + day;
+
+		return [year, month, day].join('-');
+	}
+
+</script>

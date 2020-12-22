@@ -1,0 +1,154 @@
+﻿<link rel='icon' href='~/images/abico.ico' type='image/x-icon' />
+
+
+<a class="c_sidebar_brand" asp-action="Index" asp-controller="Admin">
+	<img class="c-sidebar__brand-img" src="~/images/LOGOACADEMY.png" alt="Logo">
+</a>
+
+<h4 class="c_sidebar__title">Admin Control</h4>
+
+<ul class="c_sidebar_list">
+	<li class="c-sidebar__item">
+		<a class="c-sidebar__link" asp-controller="Accounts" asp-action="Index">
+			<i class="fas fa-undo"></i>Back to site
+		</a>
+	</li>
+	<li class="c-sidebar__item">
+		<a class="c-sidebar__link @(ViewContext.RouteData.Values.Values.Contains("Index") ? "is_active" : null)" asp-controller="Admin" asp-action="Index">
+			<i class="fas fa-home"></i>Home
+		</a>
+	</li>
+	<li class="c-sidebar__item">
+		<a class="c-sidebar__link
+           @(ViewContext.RouteData.Values.Values.Contains("LoansManagment")
+               ? "is_active"
+               : (ViewContext.RouteData.Values.Values.Contains("AddLoan") ? "is_active" : null))"
+		   asp-controller="Admin"
+		   asp-action="LoansManagment">
+			<i class="fas fa-euro-sign"></i>  Loans
+		</a>
+	</li>
+
+	<li class="c-sidebar__item">
+		<a class="c-sidebar__link
+           @(ViewContext.RouteData.Values.Values.Contains("DepositManagment")
+               ? "is_active"
+               : (ViewContext.RouteData.Values.Values.Contains("AddDeposit") ? "is_active" : null))"
+		   asp-controller="Admin"
+		   asp-action="DepositManagment">
+			<i class="fas fa-money-bill-alt"></i>Deposits
+		</a>
+	</li>
+	<li class="c-sidebar__item">
+		<a class="c-sidebar__link
+           @(ViewContext.RouteData.Values.Values.Contains("Profile")
+               ? "is_active"
+               : (ViewContext.RouteData.Values.Values.Contains("EditProfile") ? "is_active" : null))"
+		   asp-controller="Admin"
+		   asp-action="Profile">
+			<i class="fas fa-user-cog"></i>Profile
+		</a>
+	</li>
+
+	<li class="c-sidebar__item">
+		<a class="c-sidebar__link" asp-controller="User" asp-action="Logout">
+			<i class="fas fa-sign-out-alt"></i>Exit
+		</a>
+	</li>
+</ul>
+
+<h4 class="c_sidebar__title">User Requests</h4>
+<ul class="c_sidebar_list">
+	<li class="c-sidebar__item">
+		<a class="c-sidebar__link
+             @(ViewContext.RouteData.Values.Values.Contains("LoanRequests")
+               ? "is_active"
+               : (ViewContext.RouteData.Values.Values.Contains("Details") ? "is_active" : null))"
+		   asp-controller="Admin"
+		   asp-action="LoanRequests">
+			<i class="fas fa-euro-sign"></i>Loans requests
+			@if (ViewBag.RequestedLoansCounterMenu > 0)
+			{
+				<sup class="menu-counter-text">  @ViewBag.RequestedLoansCounterMenu</sup>
+			}
+		</a>
+	</li>
+	<li class="c-sidebar__item">
+		<a class="c-sidebar__link
+             @(ViewContext.RouteData.Values.Values.Contains("DepositRequests")
+               ? "is_active"
+               : (ViewContext.RouteData.Values.Values.Contains("SomeNewUrl") ? "is_active" : null))"
+		   asp-controller="Admin"
+		   asp-action="DepositRequests">
+			<i class="fas fa-money-bill-alt"></i>Deposit requests
+			@if (ViewBag.RequestedDepositsCounterMenu > 0)
+			{
+				<sup class="menu-counter-text"> @ViewBag.RequestedDepositsCounterMenu </sup>
+			}
+
+		</a>
+	</li>
+	<li class="c-sidebar__item">
+		<a class="c-sidebar__link
+             @(ViewContext.RouteData.Values.Values.Contains("CardsManagement")
+               ? "is_active"
+               : (ViewContext.RouteData.Values.Values.Contains("CreateCard") ? "is_active" : null))"
+		   asp-controller="Admin"
+		   asp-action="CardsManagement">
+			<i class="fas fa-credit-card"></i>Card management
+			@if (ViewBag.RequestedCardsCounterMenu > 0)
+			{
+				<sup class="menu-counter-text"> @ViewBag.RequestedCardsCounterMenu</sup>
+			}
+		</a>
+	</li>
+
+</ul>
+
+
+
+<h4 class="c_sidebar__title">User Control</h4>
+
+<ul class="c_sidebar_list">
+	<li class="c-sidebar__item">
+		<a class="c-sidebar__link
+             @(ViewContext.RouteData.Values.Values.Contains("ActiveUsers")
+               ? "is_active"
+               : (ViewContext.RouteData.Values.Values.Contains("ActiveUsers") ? "is_active" : null))"
+		   asp-controller="Admin"
+		   asp-action="ActiveUsers">
+			<i class="fas fa-table"></i> Active Users
+		</a>
+	</li>
+	<li class="c-sidebar__item">
+		<a class="c-sidebar__link
+             @(ViewContext.RouteData.Values.Values.Contains("BlockedUsers")
+               ? "is_active"
+               : (ViewContext.RouteData.Values.Values.Contains("BlockedUsers") ? "is_active" : null))"
+		   asp-controller="Admin"
+		   asp-action="BlockedUsers">
+			<i class="fas fa-exclamation-triangle"></i>Banned Users
+		</a>
+	</li>
+	<li class="c-sidebar__item">
+		<a class="c-sidebar__link
+             @(ViewContext.RouteData.Values.Values.Contains("TransactionsHistory")
+               ? "is_active"
+               : (ViewContext.RouteData.Values.Values.Contains("TransactionHistoryDetails") ? "is_active" : null))"
+		   asp-controller="Admin"
+		   asp-action="TransactionsHistory">
+			<i class="fas fa-history"></i>Transactions history
+		</a>
+	</li>
+	<li class="c-sidebar__item">
+		<a class="c-sidebar__link
+             @(ViewContext.RouteData.Values.Values.Contains("Reports")
+               ? "is_active"
+               : (ViewContext.RouteData.Values.Values.Contains("Reports") ? "is_active" : null))"
+		   asp-controller="Admin"
+		   asp-action="Reports">
+			<i class="fas fa-chart-bar"></i> Reports
+		</a>
+	</li>
+</ul>
+
